@@ -1,20 +1,20 @@
 <template>
   <div>
     <job-form />
-    <job-list />
+    <overview />
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 import JobForm from '@/components/offer/JobForm.vue'
-import JobList from '@/components/offer/JobList.vue'
+import Overview from '@/components/offer/Overview.vue'
 
 export default defineComponent({
   name: 'NewOffer',
   components: {
     JobForm,
-    JobList
+    Overview
   }
 })
 </script>
