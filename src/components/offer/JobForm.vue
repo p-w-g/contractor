@@ -46,12 +46,12 @@
         </fieldset>
       </form>
     </header>
-    <p>task: {{ this.task }} amount: {{ this.amount }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import store from '@/store/index'
 
 export default defineComponent({
   name: 'JobForm',
@@ -62,10 +62,14 @@ export default defineComponent({
   }),
   methods: {
     addNewLabel() {
-      throw new Error('Unimplemented')
+      store.dispatch('addNewLabelAction', this.label)
     },
     addNewTask() {
-      throw new Error('Unimplemented')
+      store.dispatch({
+        type: 'addNewTaskAction',
+        task: this.task,
+        amount: this.amount
+      })
     }
   }
 })

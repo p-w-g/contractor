@@ -1,18 +1,15 @@
 <template>
   <div className="fr__content-column">
+    <h3>Overview</h3>
     <table>
       <thead>
         <tr>
           <th>Total:</th>
-          <th>{totalSum}</th>
+          <th>{{ grandTotal }}</th>
         </tr>
       </thead>
       <tbody>
-        <!-- for all labels push row wrapper  -->
-        <!-- {Object.getOwnPropertyNames(expenses).length === 0 ? null : (
-        <RowWrapper label="" />
-        )} {labels.map((label, j) => { return
-        <RowWrapper key="{j}" label="{label}" />; })} -->
+        <etapp />
       </tbody>
     </table>
   </div>
@@ -20,13 +17,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Etapp from './Etapp.vue'
+import store from '@/store/index'
 
 export default defineComponent({
   name: 'JobList',
+  components: {
+    Etapp
+  },
   data: () => ({}),
-  methods: {
-    assignLabel() {
-      throw new Error('Unimplemented')
+  computed: {
+    grandTotal(): number {
+      return store.getters.grandTotal
     }
   }
 })
