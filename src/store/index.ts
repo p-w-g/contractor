@@ -59,6 +59,9 @@ export default createStore({
         (accumulator: number, current: number) => accumulator + current,
         0
       )
+    },
+    labels: (state): Array<string> => {
+      return state.etappLabels
     }
   }
 })
