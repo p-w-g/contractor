@@ -2,6 +2,58 @@
   <div className="fr__heading">
     <header>
       <h2>Nytt projekt</h2>
+      <form className="fr__form" @submit.prevent="addLocation">
+        <fieldset>
+          <div className="fr__label-wrapper">
+            <label htmlFor="labels">Angående</label>
+            <input
+              id="labels"
+              type="text"
+              v-model="label"
+              className="fr__input-box"
+            />
+          </div>
+          <div className="fr__label-wrapper">
+            <label htmlFor="labels">Fastighet</label>
+            <input
+              id="labels"
+              type="text"
+              v-model="label"
+              className="fr__input-box"
+            />
+          </div>
+          <div className="fr__label-wrapper">
+            <label htmlFor="labels">Jobbstart</label>
+            <input
+              id="labels"
+              type="text"
+              v-model="label"
+              className="fr__input-box"
+            />
+          </div>
+
+          <button class="fr__button--submit">Spåra</button>
+        </fieldset>
+      </form>
+
+      <hr />
+      <form className="fr__form" @submit.prevent="addNewLabel">
+        <fieldset>
+          <div className="fr__label-wrapper">
+            <label htmlFor="labels">Etapp</label>
+            <input
+              id="labels"
+              type="text"
+              v-model="label"
+              className="fr__input-box"
+            />
+          </div>
+
+          <button class="fr__button--submit">Spåra</button>
+        </fieldset>
+      </form>
+
+      <hr />
       <form
         id="expenses-form"
         className="fr__form"
@@ -26,23 +78,7 @@
               className="fr__input-box"
             />
           </div>
-          <button />
-        </fieldset>
-      </form>
-
-      <form className="fr__form" @submit.prevent="addNewLabel">
-        <fieldset>
-          <div className="fr__label-wrapper">
-            <label htmlFor="labels">Etapp</label>
-            <input
-              id="labels"
-              type="text"
-              v-model="label"
-              className="fr__input-box"
-            />
-          </div>
-
-          <button />
+          <button class="fr__button--submit">Spåra</button>
         </fieldset>
       </form>
     </header>
@@ -70,6 +106,14 @@ export default defineComponent({
         task: this.task,
         amount: this.amount
       })
+    },
+    addLocation() {
+      // TODO: implement locationAction
+      // store.dispatch({
+      //   type: 'addNewTaskAction',
+      //   task: this.task,
+      //   amount: this.amount
+      // })
     }
   }
 })
