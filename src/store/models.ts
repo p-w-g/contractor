@@ -11,3 +11,14 @@ export class taskModel {
     this.Label = ''
   }
 }
+export class locationModel {
+  Angaende: string
+  Fastighet: string
+  Jobbstart: string
+
+  constructor() {
+    this.Angaende = ''
+    this.Fastighet = ''
+    this.Jobbstart = ''
+  }
+}

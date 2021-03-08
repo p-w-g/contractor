@@ -5,29 +5,29 @@
       <form className="fr__form" @submit.prevent="addLocation">
         <fieldset>
           <div className="fr__label-wrapper">
-            <label htmlFor="labels">Angående</label>
+            <label htmlFor="angaende">Angående</label>
             <input
-              id="labels"
+              id="angaende"
               type="text"
-              v-model="label"
+              v-model="angaende"
               className="fr__input-box"
             />
           </div>
           <div className="fr__label-wrapper">
-            <label htmlFor="labels">Fastighet</label>
+            <label htmlFor="fastighet">Fastighet</label>
             <input
-              id="labels"
+              id="fastighet"
               type="text"
-              v-model="label"
+              v-model="fastighet"
               className="fr__input-box"
             />
           </div>
           <div className="fr__label-wrapper">
-            <label htmlFor="labels">Jobbstart</label>
+            <label htmlFor="jobbstart">Jobbstart</label>
             <input
-              id="labels"
+              id="jobbstart"
               type="text"
-              v-model="label"
+              v-model="jobbstart"
               className="fr__input-box"
             />
           </div>
@@ -94,7 +94,10 @@ export default defineComponent({
   data: () => ({
     task: '',
     amount: '',
-    label: ''
+    label: '',
+    angaende: '',
+    fastighet: '',
+    jobbstart: ''
   }),
   methods: {
     addNewLabel() {
@@ -108,12 +111,12 @@ export default defineComponent({
       })
     },
     addLocation() {
-      // TODO: implement locationAction
-      // store.dispatch({
-      //   type: 'addNewTaskAction',
-      //   task: this.task,
-      //   amount: this.amount
-      // })
+      store.dispatch({
+        type: 'addLocationDescriptionAction',
+        ang: this.angaende,
+        fastighet: this.fastighet,
+        start: this.jobbstart
+      })
     }
   }
 })
