@@ -1,7 +1,7 @@
 <template>
   <div className="fr__heading">
     <header>
-      <h2>Nytt projekt</h2>
+      <h3>Nytt projekt</h3>
       <form className="fr__form" @submit.prevent="addLocation">
         <fieldset>
           <div className="fr__label-wrapper">
