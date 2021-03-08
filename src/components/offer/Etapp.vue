@@ -1,19 +1,19 @@
 <template>
-  <tr>
-    <th>Etapp: Okänd</th>
-    <th>{{ unassignedSum }}</th>
-  </tr>
-
-  <tr v-for="(task, i) in unassignedTasks" :key="i">
-    <td>{{ task.Description }}</td>
-    <td>{{ task.Amount }}</td>
-  </tr>
-
-  <task v-for="(label, i) in labels" :key="i" :etapp="label" />
+  <tbody>
+    <tr>
+      <th>Etapp: Okänd</th>
+      <th>{{ unassignedSum }}</th>
+    </tr>
+    <tr v-for="(task, i) in unassignedTasks" :key="i">
+      <task :task="task" />
+    </tr>
+  </tbody>
+  <tasks v-for="(label, i) in labels" :key="i" :etapp="label" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Tasks from './Tasks.vue'
 import Task from './Task.vue'
 import store from '@/store/index'
 import { taskModel } from '@/store/models'
@@ -22,6 +22,7 @@ export default defineComponent({
   name: 'Etapp',
   data: () => ({}),
   components: {
+    Tasks,
     Task
   },
   methods: {},
