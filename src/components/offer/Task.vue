@@ -23,8 +23,9 @@
     <select v-model="selected" @change="assignLabel">
       <option
         v-for="(label, i) in labels"
-        v-bind:value="{ label: label, task: task.Id }"
+        :value="label"
         :key="i"
+        :selected="label === task.label"
       >
         {{ label }}
       </option>
@@ -32,7 +33,7 @@
   </td>
 
   <td>
-    <div>
+    <div class="fr__img-wrapper">
       <span @click="deleteTask(task.Id)"> <img :src="DeleteIcon" /> </span>
 
       <span @click="toggleEditing(task.Id)"> <img :src="EditIcon" /> </span>
@@ -52,7 +53,6 @@ import CloneIcon from '../../assets/content_copy.svg'
 
 import { defineComponent } from 'vue'
 import store from '@/store/index'
-import { taskModel } from '@/store/models'
 
 export default defineComponent({
   name: 'Task',
@@ -82,41 +82,51 @@ export default defineComponent({
   },
   methods: {
     assignLabel() {
-      // TODO: implement assignLabelAction
-      console.log('selected: ', this.selected)
+      store.dispatch({
+        type: 'assignLabelAction',
+        label: this.selected,
+        id: this.task?.Id
+      })
     },
 
     deleteTask(id: number) {
-      // TODO: implement deleteTaskAction
-      console.log('this task should be deleted (id): ', id)
+      store.dispatch({
+        type: 'deleteTaskAction',
+        id: id
+      })
     },
 
     unassignLabel(id: number) {
-      // TODO: implement unassignLableAction
-      console.log('this task should have its label unassigned: ', id)
-      // return unassignLabel({ id });
+      store.dispatch({
+        type: 'unassignLabelAction',
+        id: id
+      })
     },
 
     cloneTask(id: number) {
-      console.log('this task should be cloned with new Id but same ...values: ', id)
-      // TODO: implement cloneTaskAction
+      store.dispatch({
+        type: 'cloneTaskAction',
+        id: id
+      })
     },
 
     toggleEditing(id: number) {
-      // TODO: implement editing toggle
-      // if (this.isEditable) {
-      // const title = localExpense;
-      // const amount = localAmount;
-      // setIsEditable(false);
-      // modifyExpense({ id, title, amount });
-      // return;
-      // }
-      // if (!this.isEditable) {
-      // setLocalExpense(expense.title);
-      // setLocalAmount(expense.amount);
-      // setIsEditable(true);
-      // return
-      // }
+      if (this.isEditable) {
+        const description = this.localDescription
+        const amount = this.localAmount
+        store.dispatch({
+          type: 'updateTaskAction',
+          id: id,
+          desc: description,
+          amount: amount
+        })
+        this.isEditable = false
+      }
+      if (!this.isEditable) {
+        this.localAmount = this.task?.Amount
+        this.localDescription = this.task?.Description
+        this.isEditable = true
+      }
     }
   }
 })
