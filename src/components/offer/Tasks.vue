@@ -5,7 +5,7 @@
       <th>{{ filteredSum }}</th>
     </tr>
     <tr v-for="(task, i) in filteredTasks" :key="i">
-      <task :task="task"/>
+      <task :task="task" />
     </tr>
   </tbody>
 </template>

@@ -5,7 +5,7 @@
       <form className="fr__form" @submit.prevent="addLocation">
         <fieldset>
           <div className="fr__label-wrapper">
-            <label htmlFor="angaende">Angående</label>
+            <label for="angaende">Angående</label>
             <input
               id="angaende"
               type="text"
@@ -14,7 +14,7 @@
             />
           </div>
           <div className="fr__label-wrapper">
-            <label htmlFor="fastighet">Fastighet</label>
+            <label for="fastighet">Fastighet</label>
             <input
               id="fastighet"
               type="text"
@@ -23,7 +23,7 @@
             />
           </div>
           <div className="fr__label-wrapper">
-            <label htmlFor="jobbstart">Jobbstart</label>
+            <label for="jobbstart">Jobbstart</label>
             <input
               id="jobbstart"
               type="text"
@@ -40,7 +40,7 @@
       <form className="fr__form" @submit.prevent="addNewLabel">
         <fieldset>
           <div className="fr__label-wrapper">
-            <label htmlFor="labels">Etapp</label>
+            <label for="labels">Etapp</label>
             <input
               id="labels"
               type="text"
@@ -61,16 +61,17 @@
       >
         <fieldset>
           <div className="fr__label-wrapper">
-            <label htmlFor="expense">Beskrivning</label>
+            <label for="description">Beskrivning</label>
             <input
-              id="expense"
+              ref="desc"
+              id="description"
               type="text"
               v-model="task"
               className="fr__input-box"
             />
           </div>
           <div className="fr__label-wrapper">
-            <label htmlFor="amount">Summan</label>
+            <label for="amount">Summan</label>
             <input
               id="amount"
               type="number"
@@ -91,6 +92,7 @@ import store from '@/store/index'
 
 export default defineComponent({
   name: 'JobForm',
+
   data: () => ({
     task: '',
     amount: '',
@@ -102,6 +104,7 @@ export default defineComponent({
   methods: {
     addNewLabel() {
       store.dispatch('addNewLabelAction', this.label)
+      this.label = ''
     },
     addNewTask() {
       store.dispatch({
@@ -109,6 +112,9 @@ export default defineComponent({
         task: this.task,
         amount: this.amount
       })
+      this.task = ''
+      this.amount = ''
+      ;(this.$refs.desc as HTMLElement).focus()
     },
     addLocation() {
       store.dispatch({
