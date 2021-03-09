@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr v-if="unassignedTasks.length > 0">
     <th>Obestämd</th>
     <th>{{ unassignedSum }}</th>
   </tr>
