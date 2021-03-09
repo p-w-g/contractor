@@ -37,7 +37,7 @@ export default defineComponent({
     },
     filteredSum(): number {
       return this.filteredAmounts.reduce(
-        (acc: number, curr: number) => acc + curr,
+        (acc: number, curr: number) => acc + Number(curr),
         0
       )
     }

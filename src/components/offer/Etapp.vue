@@ -35,7 +35,7 @@ export default defineComponent({
     },
     unassignedSum(): number {
       return this.unassignedAmounts.reduce(
-        (acc: number, curr: number) => acc + curr,
+        (acc: number, curr: number) => acc + Number(curr),
         0
       )
     },

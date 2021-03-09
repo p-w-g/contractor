@@ -30,10 +30,14 @@ export default createStore({
       localStorage.setItem('location', JSON.stringify(state.location))
     },
 
-    deleteJson(state) {
-      localStorage.setItem('location', JSON.stringify('{}'))
-      localStorage.setItem('etappLabels', JSON.stringify('[]'))
-      localStorage.setItem('job', JSON.stringify('[]'))
+    resetState(state) {
+      state.etappLabels = []
+      state.job = []
+      state.location = {} as locationModel
+
+      localStorage.setItem('job', JSON.stringify(state.job))
+      localStorage.setItem('etappLabels', JSON.stringify(state.etappLabels))
+      localStorage.setItem('location', JSON.stringify(state.location))
     },
 
     updateId(state) {
@@ -136,6 +140,14 @@ export default createStore({
     updateTaskAction(context, payload) {
       context.commit('updateTask', payload)
       context.commit('saveJobJson')
+    },
+
+    attemptLoadJsonAction(context) {
+      context.commit('loadAllJson')
+    },
+
+    resetStateAction(context) {
+      context.commit('resetState')
     }
   },
   getters: {
@@ -144,7 +156,7 @@ export default createStore({
     },
     grandTotal: (state, getters) => {
       return getters.amounts.reduce(
-        (accumulator: number, current: number) => accumulator + current,
+        (accumulator: number, current: number) => accumulator + Number(current),
         0
       )
     },
