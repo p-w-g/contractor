@@ -1,13 +1,11 @@
 <template>
-  <tbody>
-    <tr>
-      <th>Etapp: Okänd</th>
-      <th>{{ unassignedSum }}</th>
-    </tr>
-    <tr v-for="(task, i) in unassignedTasks" :key="i">
-      <task :task="task" />
-    </tr>
-  </tbody>
+  <tr>
+    <th>Obestämd</th>
+    <th>{{ unassignedSum }}</th>
+  </tr>
+  <tr v-for="(task, i) in unassignedTasks" :key="i">
+    <task :task="task" />
+  </tr>
   <tasks v-for="(label, i) in labels" :key="i" :etapp="label" />
 </template>
 

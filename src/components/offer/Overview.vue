@@ -1,13 +1,11 @@
 <template>
   <div className="fr__content-column">
-    <h3>Overview</h3>
+    <h3>Sammanfattning</h3>
     <table>
-      <thead>
-        <tr>
-          <th>Total:</th>
-          <th>{{ grandTotal }}</th>
-        </tr>
-      </thead>
+      <tr>
+        <th>Total:</th>
+        <th>{{ grandTotal }}</th>
+      </tr>
       <tbody>
         <etapp />
       </tbody>

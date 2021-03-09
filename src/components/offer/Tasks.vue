@@ -1,13 +1,11 @@
 <template>
-  <tbody>
-    <tr>
-      <th>Etapp: {{ etapp }}</th>
-      <th>{{ filteredSum }}</th>
-    </tr>
-    <tr v-for="(task, i) in filteredTasks" :key="i">
-      <task :task="task" />
-    </tr>
-  </tbody>
+  <tr>
+    <th>{{ etapp }}</th>
+    <th>{{ filteredSum }}</th>
+  </tr>
+  <tr v-for="(task, i) in filteredTasks" :key="i">
+    <task :task="task" />
+  </tr>
 </template>
 
 <script lang="ts">
