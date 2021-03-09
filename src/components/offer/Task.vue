@@ -1,23 +1,24 @@
 <template>
-  <td v-if="isEditable">
+  <td>
     <input
+      v-if="isEditable"
       id="local-expense"
-      type=""
-      class="fr__input-box"
       v-model="localDescription"
+      @keydown.enter="toggleEditing(task.Id)"
     />
+    {{ !isEditable ? task.Description : '' }}
   </td>
-  <td v-else>{{ task.Description }}</td>
 
-  <td v-if="isEditable">
+  <td>
     <input
+      v-if="isEditable"
       id="local-amount"
       type=""
-      class="fr__input-box"
       v-model="localAmount"
+      @keydown.enter="toggleEditing(task.Id)"
     />
+    {{ !isEditable ? task.Amount : '' }}
   </td>
-  <td v-else>{{ task.Amount }}</td>
 
   <td>
     <select v-model="selected" @change="assignLabel">
@@ -121,11 +122,15 @@ export default defineComponent({
           amount: amount
         })
         this.isEditable = false
+
+        return
       }
       if (!this.isEditable) {
         this.localAmount = this.task?.Amount
         this.localDescription = this.task?.Description
         this.isEditable = true
+
+        return
       }
     }
   }
