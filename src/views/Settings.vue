@@ -1,16 +1,18 @@
 <template>
   <Foretag />
+  <Kontakt />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import store from '@/store/index'
 import Foretag from '../components/settings/Foretag.vue'
+import Kontakt from '../components/settings/Kontakt.vue'
 
 export default defineComponent({
   name: 'Settings',
   components: {
-    Foretag
+    Foretag,
+    Kontakt
   }
 })
 </script>
