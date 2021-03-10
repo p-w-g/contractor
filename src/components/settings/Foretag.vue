@@ -28,7 +28,7 @@
 
         <form-input
           labelFull="Organisation eller Personnummer"
-          labelShort="orgnumm"
+          labelShort="orgnummer"
           v-model="orgnummer"
         />
 
