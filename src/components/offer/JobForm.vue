@@ -6,33 +6,23 @@
       <div class="fr__column-wrap">
         <form class="fr__form" @submit.prevent="addLocation">
           <fieldset>
-            <div class="fr__label-wrapper">
-              <label for="angaende">Angående</label>
-              <input
-                id="angaende"
-                type="text"
-                v-model="angaende"
-                class="fr__input-box"
-              />
-            </div>
-            <div class="fr__label-wrapper">
-              <label for="fastighet">Fastighet</label>
-              <input
-                id="fastighet"
-                type="text"
-                v-model="fastighet"
-                class="fr__input-box"
-              />
-            </div>
-            <div class="fr__label-wrapper">
-              <label for="jobbstart">Jobbstart</label>
-              <input
-                id="jobbstart"
-                type="text"
-                v-model="jobbstart"
-                class="fr__input-box"
-              />
-            </div>
+            <form-input
+              labelFull="Angående"
+              labelShort="angaende"
+              v-model="angaende"
+            />
+
+            <form-input
+              labelFull="Fastighet"
+              labelShort="fastighet"
+              v-model="fastighet"
+            />
+
+            <form-input
+              labelFull="Jobbstart"
+              labelShort="jobbstart"
+              v-model="jobbstart"
+            />
 
             <button class="fr__button--submit">Spåra</button>
           </fieldset>
@@ -40,25 +30,13 @@
 
         <form class="fr__form" @submit.prevent="addNewLabel">
           <fieldset>
-            <div class="fr__label-wrapper">
-              <label for="labels">Etapp</label>
-              <input
-                id="labels"
-                type="text"
-                v-model="label"
-                class="fr__input-box"
-              />
-            </div>
+            <form-input labelFull="Etapp" labelShort="labels" v-model="label" />
 
             <button class="fr__button--submit">Lägg till</button>
           </fieldset>
         </form>
 
-        <form
-          id="expenses-form"
-          class="fr__form"
-          @submit.prevent="addNewTask"
-        >
+        <form id="expenses-form" class="fr__form" @submit.prevent="addNewTask">
           <fieldset>
             <div class="fr__label-wrapper">
               <label for="description">Beskrivning</label>
@@ -91,6 +69,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import store from '@/store/index'
+import FormInput from '../FormInput.vue'
 
 export default defineComponent({
   name: 'JobForm',
@@ -103,6 +82,9 @@ export default defineComponent({
     fastighet: '',
     jobbstart: ''
   }),
+  components: {
+    FormInput
+  },
   methods: {
     addNewLabel() {
       store.dispatch('addNewLabelAction', this.label)
