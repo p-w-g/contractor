@@ -1,36 +1,36 @@
 <template>
-  <div className="fr__heading">
+  <div class="fr__heading">
     <header>
       <h3>Nytt projekt</h3>
 
       <div class="fr__column-wrap">
-        <form className="fr__form" @submit.prevent="addLocation">
+        <form class="fr__form" @submit.prevent="addLocation">
           <fieldset>
-            <div className="fr__label-wrapper">
+            <div class="fr__label-wrapper">
               <label for="angaende">Angående</label>
               <input
                 id="angaende"
                 type="text"
                 v-model="angaende"
-                className="fr__input-box"
+                class="fr__input-box"
               />
             </div>
-            <div className="fr__label-wrapper">
+            <div class="fr__label-wrapper">
               <label for="fastighet">Fastighet</label>
               <input
                 id="fastighet"
                 type="text"
                 v-model="fastighet"
-                className="fr__input-box"
+                class="fr__input-box"
               />
             </div>
-            <div className="fr__label-wrapper">
+            <div class="fr__label-wrapper">
               <label for="jobbstart">Jobbstart</label>
               <input
                 id="jobbstart"
                 type="text"
                 v-model="jobbstart"
-                className="fr__input-box"
+                class="fr__input-box"
               />
             </div>
 
@@ -38,15 +38,15 @@
           </fieldset>
         </form>
 
-        <form className="fr__form" @submit.prevent="addNewLabel">
+        <form class="fr__form" @submit.prevent="addNewLabel">
           <fieldset>
-            <div className="fr__label-wrapper">
+            <div class="fr__label-wrapper">
               <label for="labels">Etapp</label>
               <input
                 id="labels"
                 type="text"
                 v-model="label"
-                className="fr__input-box"
+                class="fr__input-box"
               />
             </div>
 
@@ -56,27 +56,27 @@
 
         <form
           id="expenses-form"
-          className="fr__form"
+          class="fr__form"
           @submit.prevent="addNewTask"
         >
           <fieldset>
-            <div className="fr__label-wrapper">
+            <div class="fr__label-wrapper">
               <label for="description">Beskrivning</label>
               <input
                 ref="desc"
                 id="description"
                 type="text"
                 v-model="task"
-                className="fr__input-box"
+                class="fr__input-box"
               />
             </div>
-            <div className="fr__label-wrapper">
+            <div class="fr__label-wrapper">
               <label for="amount">Summan</label>
               <input
                 id="amount"
                 type="number"
                 v-model.number="amount"
-                className="fr__input-box"
+                class="fr__input-box"
               />
             </div>
             <button class="fr__button--submit">Lägg till</button>
