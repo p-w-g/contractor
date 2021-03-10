@@ -44,6 +44,9 @@
           v-model="address.tva"
         />
 
+        <input type="checkbox" id="fskatt" v-model="fskatt" />
+        <label for="fskatt">Godkänd för F-skatt?</label>
+
         <button class="fr__button--submit">Spåra</button>
       </fieldset>
     </form>
@@ -69,7 +72,8 @@ export default defineComponent({
     address: {
       ett: '',
       tva: ''
-    }
+    },
+    fskatt: false
   }),
   methods: {
     uploadImage(e: any) {
