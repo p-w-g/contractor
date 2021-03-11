@@ -85,7 +85,15 @@ export default defineComponent({
       }
     },
     saveCompany() {
-      // TODO: implement save to store and persist
+      store.dispatch({
+        type: 'saveCompanyAction',
+        previewImage: this.previewImage,
+        leadin: this.leadin,
+        orgnummer: this.orgnummer,
+        hemsida: this.hemsida,
+        address: this.address,
+        fskatt: this.fskatt
+      })
     }
   }
 })

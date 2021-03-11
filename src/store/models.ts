@@ -33,3 +33,26 @@ export class repModel {
     this.mobile = ''
   }
 }
+export class companyModel {
+  previewImage: string
+  leadin: string
+  orgnummer: string
+  hemsida: string
+  address: {
+    ett: string
+    tva: string
+  }
+  fskatt: boolean
+
+  constructor() {
+    ;(this.previewImage = ''),
+      (this.leadin = ''),
+      (this.orgnummer = ''),
+      (this.hemsida = ''),
+      (this.address = {
+        ett: '',
+        tva: ''
+      }),
+      (this.fskatt = false)
+  }
+}

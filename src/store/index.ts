@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { taskModel, locationModel, repModel } from './models'
+import { taskModel, locationModel, repModel, companyModel } from './models'
 
 export default createStore({
   state: {
@@ -7,7 +7,8 @@ export default createStore({
     job: Array<taskModel>(),
     etappLabels: Array<string>(),
     location: new locationModel(),
-    rep: new repModel()
+    rep: new repModel(),
+    company: new companyModel()
   },
 
   mutations: {
@@ -34,6 +35,10 @@ export default createStore({
 
     saveRepJson(state) {
       localStorage.setItem('rep', JSON.stringify(state.rep))
+    },
+
+    saveCompanyJson(state) {
+      localStorage.setItem('company', JSON.stringify(state.company))
     },
 
     resetState(state) {
@@ -104,10 +109,20 @@ export default createStore({
       const index = state.job.findIndex((el) => el.Id == pld.id)
       if (index != -1) state.job.splice(index, 1)
     },
+
     addRepDetails(state, pld) {
       state.rep.names = pld.names
       state.rep.mail = pld.mail
       state.rep.mobile = pld.mobile
+    },
+
+    addCompanyDetails(state, pld) {
+      state.company.previewImage = pld.previewImage
+      state.company.leadin = pld.leadin
+      state.company.orgnummer = pld.orgnummer
+      state.company.hemsida = pld.hemsida
+      state.company.address = pld.address
+      state.company.fskatt = pld.fskatt
     }
   },
   actions: {
@@ -164,6 +179,11 @@ export default createStore({
     saveRepAction(context, payload) {
       context.commit('addRepDetails', payload)
       context.commit('saveRepJson')
+    },
+
+    saveCompanyAction(context, payload) {
+      context.commit('addCompanyDetails', payload)
+      context.commit('saveCompanyJson')
     }
   },
   getters: {
