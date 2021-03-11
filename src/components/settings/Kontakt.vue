@@ -3,12 +3,12 @@
     <h3>Kontaktuppgifter</h3>
   </div>
   <div class="fr__column-wrap">
-    <form class="fr__form" @submit.prevent="saveCompany">
+    <form class="fr__form" @submit.prevent="saveRep">
       <fieldset>
         <form-input
           labelFull="Namn och Efternamn"
-          labelShort="person"
-          v-model="person"
+          labelShort="names"
+          v-model="names"
         />
 
         <form-input
@@ -41,13 +41,18 @@ export default defineComponent({
     FormInput
   },
   data: () => ({
-    person: '',
+    names: '',
     mail: '',
     mobile: ''
   }),
   methods: {
     saveRep() {
-      // TODO: implement save to store and persist
+      store.dispatch({
+        type: 'saveRepAction',
+        names: this.names,
+        mail: this.mail,
+        mobile: this.mobile
+      })
     }
   }
 })

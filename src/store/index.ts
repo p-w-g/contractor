@@ -1,12 +1,13 @@
 import { createStore } from 'vuex'
-import { taskModel, locationModel } from './models'
+import { taskModel, locationModel, repModel } from './models'
 
 export default createStore({
   state: {
     latestID: 0,
     job: Array<taskModel>(),
     etappLabels: Array<string>(),
-    location: new locationModel()
+    location: new locationModel(),
+    rep: new repModel()
   },
 
   mutations: {
@@ -16,6 +17,7 @@ export default createStore({
         localStorage.getItem('etappLabels') || '{}'
       )
       state.location = JSON.parse(localStorage.getItem('location') || '{}')
+      state.rep = JSON.parse(localStorage.getItem('rep') || '{}')
     },
 
     saveJobJson(state) {
@@ -28,6 +30,10 @@ export default createStore({
 
     saveLocationJson(state) {
       localStorage.setItem('location', JSON.stringify(state.location))
+    },
+
+    saveRepJson(state) {
+      localStorage.setItem('rep', JSON.stringify(state.rep))
     },
 
     resetState(state) {
@@ -97,6 +103,11 @@ export default createStore({
     deleteTask(state, pld) {
       const index = state.job.findIndex((el) => el.Id == pld.id)
       if (index != -1) state.job.splice(index, 1)
+    },
+    addRepDetails(state, pld) {
+      state.rep.names = pld.names
+      state.rep.mail = pld.mail
+      state.rep.mobile = pld.mobile
     }
   },
   actions: {
@@ -148,6 +159,11 @@ export default createStore({
 
     resetStateAction(context) {
       context.commit('resetState')
+    },
+
+    saveRepAction(context, payload) {
+      context.commit('addRepDetails', payload)
+      context.commit('saveRepJson')
     }
   },
   getters: {

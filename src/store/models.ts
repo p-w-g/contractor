@@ -22,3 +22,14 @@ export class locationModel {
     this.Jobbstart = ''
   }
 }
+export class repModel {
+  names: string
+  mail: string
+  mobile: string
+
+  constructor() {
+    this.names = ''
+    this.mail = ''
+    this.mobile = ''
+  }
+}
