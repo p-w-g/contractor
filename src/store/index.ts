@@ -25,7 +25,14 @@ export default createStore({
         localStorage.getItem('etappLabels') || '{}'
       )
       state.location = JSON.parse(localStorage.getItem('location') || '{}')
+    },
+
+    loadSettingsJson(state) {
       state.rep = JSON.parse(localStorage.getItem('rep') || '{}')
+      state.company = JSON.parse(localStorage.getItem('company') || '{}')
+      state.disclaimers = JSON.parse(
+        localStorage.getItem('disclaimers') || '{}'
+      )
     },
 
     saveJobJson(state) {
@@ -192,6 +199,10 @@ export default createStore({
 
     attemptLoadJsonAction(context) {
       context.commit('loadAllJson')
+    },
+
+    attemptLoadSettingsAction(context) {
+      context.commit('loadSettingsJson')
     },
 
     resetStateAction(context) {

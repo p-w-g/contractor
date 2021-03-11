@@ -9,6 +9,7 @@ import { defineComponent } from 'vue'
 import Foretag from '../components/settings/Foretag.vue'
 import Kontakt from '../components/settings/Kontakt.vue'
 import Disclaimers from '../components/settings/Disclaimers.vue'
+import store from '@/store/index'
 
 export default defineComponent({
   name: 'Settings',
@@ -16,6 +17,9 @@ export default defineComponent({
     Foretag,
     Kontakt,
     Disclaimers
+  },
+  mounted() {
+    store.dispatch('attemptLoadSettingsAction')
   }
 })
 </script>
