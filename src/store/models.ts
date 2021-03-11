@@ -33,6 +33,27 @@ export class repModel {
     this.mobile = ''
   }
 }
+export class disclaimerModel {
+  fakturering: string
+  giltig: string
+  garanti: string
+  arbetstid: string
+  försäkring: string
+  avvikelse: string
+  extra: string
+  rot: string
+
+  constructor() {
+    this.fakturering = ''
+    this.giltig = ''
+    this.garanti = ''
+    this.arbetstid = ''
+    this.försäkring = ''
+    this.avvikelse = ''
+    this.extra = ''
+    this.rot = ''
+  }
+}
 export class companyModel {
   previewImage: string
   leadin: string

@@ -83,7 +83,17 @@ export default defineComponent({
   }),
   methods: {
     saveDisclaimers() {
-      // TODO: implement save to store and persist
+      store.dispatch({
+        type: 'saveDisclaimersAction',
+        fakturering: this.fakturering,
+        giltig: this.giltig,
+        garanti: this.garanti,
+        arbetstid: this.arbetstid,
+        försäkring: this.försäkring,
+        avvikelse: this.avvikelse,
+        extra: this.extra,
+        rot: this.rot
+      })
     }
   }
 })

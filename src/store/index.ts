@@ -1,5 +1,11 @@
 import { createStore } from 'vuex'
-import { taskModel, locationModel, repModel, companyModel } from './models'
+import {
+  taskModel,
+  locationModel,
+  repModel,
+  companyModel,
+  disclaimerModel
+} from './models'
 
 export default createStore({
   state: {
@@ -8,7 +14,8 @@ export default createStore({
     etappLabels: Array<string>(),
     location: new locationModel(),
     rep: new repModel(),
-    company: new companyModel()
+    company: new companyModel(),
+    disclaimers: new disclaimerModel()
   },
 
   mutations: {
@@ -39,6 +46,10 @@ export default createStore({
 
     saveCompanyJson(state) {
       localStorage.setItem('company', JSON.stringify(state.company))
+    },
+
+    saveDisclaimersJson(state) {
+      localStorage.setItem('disclaimers', JSON.stringify(state.disclaimers))
     },
 
     resetState(state) {
@@ -123,6 +134,17 @@ export default createStore({
       state.company.hemsida = pld.hemsida
       state.company.address = pld.address
       state.company.fskatt = pld.fskatt
+    },
+
+    addDisclaimers(state, pld) {
+      state.disclaimers.fakturering = pld.fakturering
+      state.disclaimers.giltig = pld.giltig
+      state.disclaimers.garanti = pld.garanti
+      state.disclaimers.arbetstid = pld.arbetstid
+      state.disclaimers.försäkring = pld.försäkring
+      state.disclaimers.avvikelse = pld.avvikelse
+      state.disclaimers.extra = pld.extra
+      state.disclaimers.rot = pld.rot
     }
   },
   actions: {
@@ -184,6 +206,11 @@ export default createStore({
     saveCompanyAction(context, payload) {
       context.commit('addCompanyDetails', payload)
       context.commit('saveCompanyJson')
+    },
+
+    saveDisclaimersAction(context, payload) {
+      context.commit('addDísclaimers', payload)
+      context.commit('saveDisclaimersJson')
     }
   },
   getters: {
