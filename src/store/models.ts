@@ -42,6 +42,7 @@ export class disclaimerModel {
   avvikelse: string
   extra: string
   rot: string
+  ovrigt: string
 
   constructor() {
     this.fakturering = ''
@@ -52,6 +53,7 @@ export class disclaimerModel {
     this.avvikelse = ''
     this.extra = ''
     this.rot = ''
+    this.ovrigt = ''
   }
 }
 export class companyModel {
