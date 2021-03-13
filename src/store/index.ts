@@ -110,9 +110,9 @@ export default createStore({
     },
 
     addlocationDescription(state, pld) {
-      state.location.Angaende = pld.ang
-      state.location.Fastighet = pld.fastighet
-      state.location.Jobbstart = pld.start
+      if (pld.ang !== '') state.location.Angaende = pld.ang
+      if (pld.fastighet !== '') state.location.Fastighet = pld.fastighet
+      if (pld.start !== '') state.location.Jobbstart = pld.start
     },
 
     assignLabel(state, pld) {
@@ -133,31 +133,46 @@ export default createStore({
       state.rep.mail = pld.mail
       state.rep.mobile = pld.mobile
     },
+    clearRepDetails(state) {
+      state.rep = {} as repModel
+    },
 
     addCompanyDetails(state, pld) {
-      state.company.previewImage = pld.previewImage
-      state.company.leadin = pld.leadin
-      state.company.orgnummer = pld.orgnummer
-      state.company.hemsida = pld.hemsida
-      state.company.address = pld.address
-      state.company.fskatt = pld.fskatt
+      if (pld.previewImage !== '') state.company.previewImage = pld.previewImage
+      if (pld.leadin !== '') state.company.leadin = pld.leadin
+      if (pld.orgnummer !== '') state.company.orgnummer = pld.orgnummer
+      if (pld.hemsida !== '') state.company.hemsida = pld.hemsida
+      if (pld.address !== '') state.company.address = pld.address
+      if (pld.fskatt !== '') state.company.fskatt = pld.fskatt
+    },
+
+    clearCompanyData(state) {
+      state.company = {} as companyModel
     },
 
     addDisclaimers(state, pld) {
-      state.disclaimers.fakturering = pld.fakturering
-      state.disclaimers.giltig = pld.giltig
-      state.disclaimers.garanti = pld.garanti
-      state.disclaimers.arbetstid = pld.arbetstid
-      state.disclaimers.försäkring = pld.försäkring
-      state.disclaimers.avvikelse = pld.avvikelse
-      state.disclaimers.extra = pld.extra
-      state.disclaimers.rot = pld.rot
+      if (pld.fakturering !== '')
+        state.disclaimers.fakturering = pld.fakturering
+      if (pld.giltig !== '') state.disclaimers.giltig = pld.giltig
+      if (pld.garanti !== '') state.disclaimers.garanti = pld.garanti
+      if (pld.arbetstid !== '') state.disclaimers.arbetstid = pld.arbetstid
+      if (pld.försäkring !== '') state.disclaimers.försäkring = pld.försäkring
+      if (pld.avvikelse !== '') state.disclaimers.avvikelse = pld.avvikelse
+      if (pld.extra !== '') state.disclaimers.extra = pld.extra
+      if (pld.rot !== '') state.disclaimers.rot = pld.rot
+      if (pld.ovrigth !== '') state.disclaimers.ovrigt = pld.ovrigt
+    },
+
+    clearDisclaimers(state) {
+      state.disclaimers = {} as disclaimerModel
     }
   },
   actions: {
     addNewLabelAction(context, payload) {
-      context.commit('addNewLabel', payload)
-      context.commit('saveEtappJson')
+      if (payload !== '') {
+        context.commit('addNewLabel', payload)
+        context.commit('saveEtappJson')
+      }
     },
 
     addLocationDescriptionAction(context, payload) {
@@ -166,9 +181,11 @@ export default createStore({
     },
 
     addNewTaskAction(context, payload) {
-      context.commit('updateId')
-      context.commit('addNewTask', payload)
-      context.commit('saveJobJson')
+      if (payload.Description !== '') {
+        context.commit('updateId')
+        context.commit('addNewTask', payload)
+        context.commit('saveJobJson')
+      }
     },
 
     cloneTaskAction(context, payload) {
@@ -219,8 +236,18 @@ export default createStore({
       context.commit('saveCompanyJson')
     },
 
+    clearCompanyDataAction(context) {
+      context.commit('clearCompanyData')
+      context.commit('saveCompanyJson')
+    },
+
     saveDisclaimersAction(context, payload) {
       context.commit('addDísclaimers', payload)
+      context.commit('saveDisclaimersJson')
+    },
+
+    clearDisclaimersAction(context) {
+      context.commit('clearDisclaimers')
       context.commit('saveDisclaimersJson')
     }
   },
@@ -228,17 +255,32 @@ export default createStore({
     amounts: (state): Array<number> => {
       return state.job.map((e) => e.Amount)
     },
+
     grandTotal: (state, getters) => {
       return getters.amounts.reduce(
         (accumulator: number, current: number) => accumulator + Number(current),
         0
       )
     },
+
     labels: (state): Array<string> => {
       return state.etappLabels
     },
+
     location: (state): locationModel => {
       return state.location
+    },
+
+    company: (state): companyModel => {
+      return state.company
+    },
+
+    disclaimers: (state): disclaimerModel => {
+      return state.disclaimers
+    },
+
+    rep: (state): repModel => {
+      return state.rep
     }
   }
 })

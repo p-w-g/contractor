@@ -1,85 +1,115 @@
 <template>
   <div class="fr__heading">
     <h3>Vilkor</h3>
+    <div class="">
+      <header>
+        <form class="fr__form" @submit.prevent="saveDisclaimers">
+          <fieldset>
+            <text-area
+              labelFull="Vilkor om betalning, fakturering, förfallodag"
+              labelShort="fakturering"
+              v-model="fakturering"
+            />
+
+            <text-area
+              labelFull="Vilkor om giltighetstid"
+              labelShort="giltig"
+              v-model="giltig"
+            />
+
+            <text-area
+              labelFull="Vilkor om garanti och eventuelt materialkostnader"
+              labelShort="garanti"
+              v-model="garanti"
+            />
+
+            <text-area
+              labelFull="Vilkor om arbetstid och eventuelt överenskommelse"
+              labelShort="arbetstid"
+              v-model="arbetstid"
+            />
+
+            <text-area
+              labelFull="Vilkor om företagsförsäkring och skådeförsäkring"
+              labelShort="försäkring"
+              v-model="forsakring"
+            />
+
+            <text-area
+              labelFull="Vilkor om eventuelt mindre avvikelse"
+              labelShort="avvikelse"
+              v-model="avvikelse"
+            />
+
+            <text-area
+              labelFull="Vilkor om eventuelt tillägtjänster eller extrauppgifter pga
+              omständigheter"
+              labelShort="extra"
+              v-model="extra"
+            />
+
+            <text-area
+              labelFull="Vilkor om ROT / RUT och kräv"
+              labelShort="rot"
+              v-model="rot"
+            />
+
+            <text-area
+              labelFull="Övrigt"
+              labelShort="ovrigt"
+              v-model="ovrigt"
+            />
+          </fieldset>
+        </form>
+      </header>
+    </div>
   </div>
-  <div class="fr__column-wrap">
-    <form class="fr__form" @submit.prevent="saveCompany">
-      <fieldset>
-        <!-- Faktura skickas med 7 dagar betalningstid efter uppfört arbete -->
-        <form-input
-          labelFull="Fakturering"
-          labelShort="fakturering"
-          v-model="fakturering"
-        />
 
-        <form-input
-          labelFull="Offert giltighetstid"
-          labelShort="giltig"
-          v-model="giltig"
-        />
-
-        <form-input
-          labelFull="Garanti"
-          labelShort="garanti"
-          v-model="garanti"
-        />
-
-        <form-input
-          labelFull="Arbetstid"
-          labelShort="arbetstid"
-          v-model="arbetstid"
-        />
-
-        <form-input
-          labelFull="Försäkring"
-          labelShort="försäkring"
-          v-model="försäkring"
-        />
-
-        <form-input
-          labelFull="Mindre avvikelse"
-          labelShort="avvikelse"
-          v-model="avvikelse"
-        />
-
-        <form-input
-          labelFull="Tillägtjänster"
-          labelShort="extra"
-          v-model="extra"
-        />
-
-        <form-input
-          labelFull="ROT / ROT vilkor"
-          labelShort="rot"
-          v-model="rot"
-        />
-
-        <button class="fr__button--submit">Spåra</button>
-      </fieldset>
-    </form>
-  </div>
+  <button class="fr__button--submit" @click="saveDisclaimers">Spåra</button>
   <hr />
+  <div>
+    <article>
+      <h3>Förhandsgranskning av Vilkor</h3>
+      <p>fakturering: {{ this.disclaimerData.fakturering }}</p>
+      <p>giltig: {{ this.disclaimerData.giltig }}</p>
+      <p>garanti: {{ this.disclaimerData.garanti }}</p>
+      <p>arbetstid: {{ this.disclaimerData.arbetstid }}</p>
+      <p>försäkring: {{ this.disclaimerData.forsakring }}</p>
+      <p>avvikelse: {{ this.disclaimerData.avvikelse }}</p>
+      <p>extra: {{ this.disclaimerData.extra }}</p>
+      <p>rot: {{ this.disclaimerData.rot }}</p>
+      <p>ovrigt: {{ this.disclaimerData.ovrigt }}</p>
+    </article>
+  </div>
+  <button @click="clearDisclaimers">Rensa vilkor</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import store from '@/store/index'
-import FormInput from '../FormInput.vue'
+import TextArea from '../TextArea.vue'
+import { disclaimerModel } from '@/store/models'
 
 export default defineComponent({
   name: 'Disclaimers',
   components: {
-    FormInput
+    TextArea
+  },
+  computed: {
+    disclaimerData(): disclaimerModel {
+      return store.getters.disclaimers
+    }
   },
   data: () => ({
     fakturering: '',
     giltig: '',
     garanti: '',
     arbetstid: '',
-    försäkring: '',
+    forsakring: '',
     avvikelse: '',
     extra: '',
-    rot: ''
+    rot: '',
+    ovrigt: ''
   }),
   methods: {
     saveDisclaimers() {
@@ -92,9 +122,14 @@ export default defineComponent({
         försäkring: this.försäkring,
         avvikelse: this.avvikelse,
         extra: this.extra,
-        rot: this.rot
+        rot: this.rot,
+        ovrigt: this.ovrigt
       })
     }
+  },
+
+  clearDisclaimers() {
+    store.dispatch('clearDisclaimersAction')
   }
 })
 </script>
