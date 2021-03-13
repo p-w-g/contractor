@@ -68,14 +68,20 @@ export class companyModel {
   fskatt: boolean
 
   constructor() {
-    ;(this.previewImage = ''),
-      (this.leadin = ''),
-      (this.orgnummer = ''),
-      (this.hemsida = ''),
-      (this.address = {
-        ett: '',
-        tva: ''
-      }),
-      (this.fskatt = false)
+    this.previewImage = ''
+    this.leadin = ''
+    this.orgnummer = ''
+    this.hemsida = ''
+    this.fskatt = false
+    this.address = new addressModel()
+  }
+}
+export class addressModel {
+  ett: string
+  tva: string
+
+  constructor() {
+    this.ett = ''
+    this.tva = ''
   }
 }

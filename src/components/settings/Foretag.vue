@@ -55,7 +55,7 @@
       <h3>Förhandsgranskning av Företagsuppgifter</h3>
       <p>Logga</p>
       <img :src="companyData.previewImage" class="uploading-image" />
-      <p>Lead in: {{ this.companyData.leadIn }}</p>
+      <p>Lead in: {{ this.companyData.leadin }}</p>
       <p>Organisation nummer: {{ this.companyData.orgnummer }}</p>
       <p>Hemsida {{ this.companyData.hemsida }}</p>
       <p>
