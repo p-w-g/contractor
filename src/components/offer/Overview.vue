@@ -1,5 +1,5 @@
 <template>
-  <div className="fr__content-column">
+  <div class="fr__content-column">
     <h3>Sammanfattning</h3>
     <table>
       <tr>

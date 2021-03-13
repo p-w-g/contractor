@@ -1,12 +1,21 @@
 import { createStore } from 'vuex'
-import { taskModel, locationModel } from './models'
+import {
+  taskModel,
+  locationModel,
+  repModel,
+  companyModel,
+  disclaimerModel
+} from './models'
 
 export default createStore({
   state: {
     latestID: 0,
     job: Array<taskModel>(),
     etappLabels: Array<string>(),
-    location: new locationModel()
+    location: new locationModel(),
+    rep: new repModel(),
+    company: new companyModel(),
+    disclaimers: new disclaimerModel()
   },
 
   mutations: {
@@ -16,6 +25,14 @@ export default createStore({
         localStorage.getItem('etappLabels') || '{}'
       )
       state.location = JSON.parse(localStorage.getItem('location') || '{}')
+    },
+
+    loadSettingsJson(state) {
+      state.rep = JSON.parse(localStorage.getItem('rep') || '{}')
+      state.company = JSON.parse(localStorage.getItem('company') || '{}')
+      state.disclaimers = JSON.parse(
+        localStorage.getItem('disclaimers') || '{}'
+      )
     },
 
     saveJobJson(state) {
@@ -28,6 +45,18 @@ export default createStore({
 
     saveLocationJson(state) {
       localStorage.setItem('location', JSON.stringify(state.location))
+    },
+
+    saveRepJson(state) {
+      localStorage.setItem('rep', JSON.stringify(state.rep))
+    },
+
+    saveCompanyJson(state) {
+      localStorage.setItem('company', JSON.stringify(state.company))
+    },
+
+    saveDisclaimersJson(state) {
+      localStorage.setItem('disclaimers', JSON.stringify(state.disclaimers))
     },
 
     resetState(state) {
@@ -81,9 +110,9 @@ export default createStore({
     },
 
     addlocationDescription(state, pld) {
-      state.location.Angaende = pld.ang
-      state.location.Fastighet = pld.fastighet
-      state.location.Jobbstart = pld.start
+      if (pld.ang !== '') state.location.Angaende = pld.ang
+      if (pld.fastighet !== '') state.location.Fastighet = pld.fastighet
+      if (pld.start !== '') state.location.Jobbstart = pld.start
     },
 
     assignLabel(state, pld) {
@@ -97,12 +126,53 @@ export default createStore({
     deleteTask(state, pld) {
       const index = state.job.findIndex((el) => el.Id == pld.id)
       if (index != -1) state.job.splice(index, 1)
+    },
+
+    addRepDetails(state, pld) {
+      state.rep.names = pld.names
+      state.rep.mail = pld.mail
+      state.rep.mobile = pld.mobile
+    },
+    clearRepDetails(state) {
+      state.rep = {} as repModel
+    },
+
+    addCompanyDetails(state, pld) {
+      if (pld.previewImage !== '') state.company.previewImage = pld.previewImage
+      if (pld.leadin !== '') state.company.leadin = pld.leadin
+      if (pld.orgnummer !== '') state.company.orgnummer = pld.orgnummer
+      if (pld.hemsida !== '') state.company.hemsida = pld.hemsida
+      if (pld.address !== '') state.company.address = pld.address
+      if (pld.fskatt !== '') state.company.fskatt = pld.fskatt
+    },
+
+    clearCompanyData(state) {
+      state.company = {} as companyModel
+    },
+
+    addDisclaimers(state, pld) {
+      if (pld.fakturering !== '')
+        state.disclaimers.fakturering = pld.fakturering
+      if (pld.giltig !== '') state.disclaimers.giltig = pld.giltig
+      if (pld.garanti !== '') state.disclaimers.garanti = pld.garanti
+      if (pld.arbetstid !== '') state.disclaimers.arbetstid = pld.arbetstid
+      if (pld.försäkring !== '') state.disclaimers.försäkring = pld.försäkring
+      if (pld.avvikelse !== '') state.disclaimers.avvikelse = pld.avvikelse
+      if (pld.extra !== '') state.disclaimers.extra = pld.extra
+      if (pld.rot !== '') state.disclaimers.rot = pld.rot
+      if (pld.ovrigth !== '') state.disclaimers.ovrigt = pld.ovrigt
+    },
+
+    clearDisclaimers(state) {
+      state.disclaimers = {} as disclaimerModel
     }
   },
   actions: {
     addNewLabelAction(context, payload) {
-      context.commit('addNewLabel', payload)
-      context.commit('saveEtappJson')
+      if (payload !== '') {
+        context.commit('addNewLabel', payload)
+        context.commit('saveEtappJson')
+      }
     },
 
     addLocationDescriptionAction(context, payload) {
@@ -111,9 +181,11 @@ export default createStore({
     },
 
     addNewTaskAction(context, payload) {
-      context.commit('updateId')
-      context.commit('addNewTask', payload)
-      context.commit('saveJobJson')
+      if (payload.Description !== '') {
+        context.commit('updateId')
+        context.commit('addNewTask', payload)
+        context.commit('saveJobJson')
+      }
     },
 
     cloneTaskAction(context, payload) {
@@ -146,25 +218,69 @@ export default createStore({
       context.commit('loadAllJson')
     },
 
+    attemptLoadSettingsAction(context) {
+      context.commit('loadSettingsJson')
+    },
+
     resetStateAction(context) {
       context.commit('resetState')
+    },
+
+    saveRepAction(context, payload) {
+      context.commit('addRepDetails', payload)
+      context.commit('saveRepJson')
+    },
+
+    saveCompanyAction(context, payload) {
+      context.commit('addCompanyDetails', payload)
+      context.commit('saveCompanyJson')
+    },
+
+    clearCompanyDataAction(context) {
+      context.commit('clearCompanyData')
+      context.commit('saveCompanyJson')
+    },
+
+    saveDisclaimersAction(context, payload) {
+      context.commit('addDísclaimers', payload)
+      context.commit('saveDisclaimersJson')
+    },
+
+    clearDisclaimersAction(context) {
+      context.commit('clearDisclaimers')
+      context.commit('saveDisclaimersJson')
     }
   },
   getters: {
     amounts: (state): Array<number> => {
       return state.job.map((e) => e.Amount)
     },
+
     grandTotal: (state, getters) => {
       return getters.amounts.reduce(
         (accumulator: number, current: number) => accumulator + Number(current),
         0
       )
     },
+
     labels: (state): Array<string> => {
       return state.etappLabels
     },
+
     location: (state): locationModel => {
       return state.location
+    },
+
+    company: (state): companyModel => {
+      return state.company
+    },
+
+    disclaimers: (state): disclaimerModel => {
+      return state.disclaimers
+    },
+
+    rep: (state): repModel => {
+      return state.rep
     }
   }
 })
