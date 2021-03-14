@@ -1,19 +1,25 @@
 <template>
-  <settings />
-  <new-offer />
+  <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/offer">Offert</router-link> |
+    <router-link to="/settings">Inställningar</router-link>
+  </div>
+  <router-view />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-import NewOffer from './views/NewOffer.vue'
-import Settings from './views/Settings.vue'
-
-export default defineComponent({
-  name: 'App',
-  components: { NewOffer, Settings }
-})
-</script>
 
 <style lang="scss">
 @use './assets/fr-theme/common';
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
 </style>

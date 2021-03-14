@@ -70,8 +70,8 @@ export default createStore({
     },
 
     updateId(state) {
-      let filterOutIds = state.job.map((el) => el.Id)
-      let highestId = Math.max(...filterOutIds)
+      const filterOutIds = state.job.map((el) => el.Id)
+      const highestId = Math.max(...filterOutIds)
 
       highestId > state.latestID
         ? (state.latestID = highestId)
@@ -92,14 +92,14 @@ export default createStore({
     },
 
     updateTask(state, pld) {
-      let originalTask = state.job.find((el) => el.Id === pld.id)!
+      const originalTask = state.job.find((el) => el.Id === pld.id)!
 
       originalTask.Amount = pld.amount
       originalTask.Description = pld.desc
     },
 
     cloneTask(state, pld) {
-      let originalTask = state.job.find((el) => el.Id === pld.id)!
+      const originalTask = state.job.find((el) => el.Id === pld.id)!
 
       state.job.push({
         Description: originalTask.Description,
@@ -253,7 +253,7 @@ export default createStore({
   },
   getters: {
     amounts: (state): Array<number> => {
-      return state.job.map((e) => e.Amount)
+      return state.job.length > 0 ? state.job.map((e) => e.Amount) : []
     },
 
     grandTotal: (state, getters) => {

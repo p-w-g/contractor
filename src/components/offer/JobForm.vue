@@ -69,7 +69,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import store from '@/store/index'
-import FormInput from '../FormInput.vue'
+import FormInput from '../fsuic/FormInput.vue'
 
 export default defineComponent({
   name: 'JobForm',

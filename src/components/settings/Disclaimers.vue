@@ -87,7 +87,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import store from '@/store/index'
-import TextArea from '../TextArea.vue'
+import TextArea from '../fsuic/TextArea.vue'
 import { disclaimerModel } from '@/store/models'
 
 export default defineComponent({
