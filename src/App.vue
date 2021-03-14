@@ -1,12 +1,18 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/offer">Offert</router-link> |
-    <router-link to="/settings">Inställningar</router-link>
-  </div>
+  <drawer />
   <router-view />
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Drawer from './components/fsuic/Drawer.vue'
 
+export default defineComponent({
+  name: 'App',
+  components: {
+    Drawer
+  }
+})
+</script>
 <style lang="scss">
 @use './assets/fr-theme/common';
 
