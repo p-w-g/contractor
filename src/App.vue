@@ -1,6 +1,10 @@
 <template>
   <drawer />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="scale" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -15,17 +19,14 @@ export default defineComponent({
 </script>
 <style lang="scss">
 @use './assets/fr-theme/common';
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.5s ease;
+}
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.scale-enter-from,
+.scale-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
 }
 </style>
