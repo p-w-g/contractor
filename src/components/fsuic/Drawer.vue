@@ -8,13 +8,16 @@
       @click="toggleDrawer"
       :class="isOpen ? 'kebab--open' : ''"
     />
-    <transition name="slide-fade">
-      <ul v-if="isOpen" id="nav">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/offer">Offert</router-link></li>
-        <li><router-link to="/settings">Inställningar</router-link></li>
-      </ul>
-    </transition>
+
+    <teleport to="body">
+      <transition name="slide-fade">
+        <ul v-if="isOpen" id="nav">
+          <li><router-link to="/">Home</router-link></li>
+          <li><router-link to="/offer">Offert</router-link></li>
+          <li><router-link to="/settings">Inställningar</router-link></li>
+        </ul>
+      </transition>
+    </teleport>
   </div>
 </template>
 <script lang="ts">
