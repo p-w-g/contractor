@@ -1,12 +1,20 @@
 <template>
-  <input type="image" :src="KebabMenu" alt="Navigation Drawer" />
-
-  <!-- TODO: implement portal
-    https://v3.vuejs.org/guide/teleport.html -->
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/offer">Offert</router-link> |
-    <router-link to="/settings">Inställningar</router-link>
+  <div z-index="2">
+    <input
+      class="kebab"
+      type="image"
+      :src="KebabMenu"
+      alt="Navigation Drawer"
+      @click="toggleDrawer"
+      :class="isOpen ? 'kebab--open' : ''"
+    />
+    <transition name="slide-fade">
+      <ul v-if="isOpen" id="nav">
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/offer">Offert</router-link></li>
+        <li><router-link to="/settings">Inställningar</router-link></li>
+      </ul>
+    </transition>
   </div>
 </template>
 <script lang="ts">
@@ -23,7 +31,6 @@ export default defineComponent({
   data: () => ({ isOpen: false }),
   methods: {
     toggleDrawer() {
-      // TODO: implement teleport on drawer open
       if (this.isOpen) {
         this.isOpen = false
         return
@@ -36,3 +43,48 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+.kebab {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  border-bottom-right-radius: 5px;
+  &--open {
+    transform: translateX(147px);
+
+    background: #fefefe;
+  }
+}
+#nav {
+  padding: 18px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+  background: #fefefe;
+  border-bottom-right-radius: 5px;
+
+  list-style: none;
+  a {
+    color: #2c3e50;
+    text-decoration: none;
+
+    &.router-link-exact-active {
+      color: #97ead2;
+    }
+  }
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(-147px);
+  opacity: 0;
+}
+</style>
