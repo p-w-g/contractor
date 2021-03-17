@@ -4,7 +4,8 @@ import {
   locationModel,
   repModel,
   companyModel,
-  disclaimerModel
+  disclaimerModel,
+  avdragModel
 } from './models'
 
 export default createStore({
@@ -15,7 +16,8 @@ export default createStore({
     location: new locationModel(),
     rep: new repModel(),
     company: new companyModel(),
-    disclaimers: new disclaimerModel()
+    disclaimers: new disclaimerModel(),
+    avdrag: new avdragModel()
   },
 
   mutations: {
@@ -33,6 +35,7 @@ export default createStore({
       state.disclaimers = JSON.parse(
         localStorage.getItem('disclaimers') || '{}'
       )
+      state.avdrag = JSON.parse(localStorage.getItem('avdrag') || '{}')
     },
 
     saveJobJson(state) {
@@ -57,6 +60,10 @@ export default createStore({
 
     saveDisclaimersJson(state) {
       localStorage.setItem('disclaimers', JSON.stringify(state.disclaimers))
+    },
+
+    saveAvdragJson(state) {
+      localStorage.setItem('avdrag', JSON.stringify(state.avdrag))
     },
 
     resetState(state) {
@@ -165,6 +172,15 @@ export default createStore({
 
     clearDisclaimers(state) {
       state.disclaimers = {} as disclaimerModel
+    },
+
+    addAvdrag(state, pld) {
+      state.avdrag.percentage = pld.percentage
+      state.avdrag.maxamount = pld.maxamount
+    },
+
+    clearAvdrag(state) {
+      state.avdrag = {} as avdragModel
     }
   },
   actions: {
@@ -249,6 +265,16 @@ export default createStore({
     clearDisclaimersAction(context) {
       context.commit('clearDisclaimers')
       context.commit('saveDisclaimersJson')
+    },
+
+    saveAvdragAction(context, payload) {
+      context.commit('addAvdrag', payload)
+      context.commit('saveAvdragJson')
+    },
+
+    clearAvdragAction(context) {
+      context.commit('clearAvdrag')
+      context.commit('saveAvdragJson')
     }
   },
   getters: {
@@ -281,6 +307,10 @@ export default createStore({
 
     rep: (state): repModel => {
       return state.rep
+    },
+
+    avdrag: (state): avdragModel => {
+      return state.avdrag
     }
   }
 })

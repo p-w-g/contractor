@@ -6,15 +6,16 @@
     <form class="fr__form" @submit.prevent="saveAvdrag">
       <fieldset>
         <form-input
-          labelFull="Ange procentsatts din kund får i avdrag (ROT eller RUT) i form av decimal tex 0.30"
+          labelFull="Ange procentsatts din kund får i avdrag (ROT eller RUT, tex 30 för 30%)"
           labelShort="percentage"
           v-model.number="percentage"
         />
 
         <form-input
-          labelFull="Ange max belopp som dina kunder får i avdrage tex 150000 (per år i ROT)"
+          labelFull="Ange max belopp som dina kunder får i avdraget tex 150000 (per år i ROT)"
           labelShort="maxamount"
           v-model.number="maxamount"
+          type="number"
         />
         <button class="fr__button--submit fr__button--funky">Spåra</button>
       </fieldset>
@@ -26,11 +27,11 @@
     <article>
       <h3>Förhandsgranskning av Avdragsuppgifter</h3>
       <p>Procentsatts: {{ this.avdrag.percentage }}</p>
-      <p>maxamount {{ this.companyData.maxamount }}</p>
+      <p>Maximal belopp: {{ this.avdrag.maxamount }}</p>
     </article>
   </div>
   <button class="fr__button--submit fr__button--funky" @click="clearAvdrag">
-    Rensa Företagsuppgifter
+    Rensa avdragsuppgifter
   </button>
 </template>
 
@@ -38,8 +39,7 @@
 import { defineComponent } from 'vue'
 import store from '@/store/index'
 import FormInput from '../fsuic/FormInput.vue'
-// TODO: implement
-// import { companyModel } from '@/store/models'
+import { avdragModel } from '@/store/models'
 
 export default defineComponent({
   name: 'Avdrag',
@@ -47,33 +47,26 @@ export default defineComponent({
     FormInput
   },
   data: () => ({
-    percentage: '',
-    maxamount: ''
+    percentage: 0,
+    maxamount: 0
   }),
   computed: {
-    // todo: implement
-    // avdrag(): avdragModel {
-    //   return store.getters.avdrag
-    // }
+    avdrag(): avdragModel {
+      return store.getters.avdrag
+    }
   },
   methods: {
     saveAvdrag() {
-      //  TODO: implement
-      // store.dispatch({
-      //   type: 'saveCompanyAction',
-      //   previewImage: this.previewImage,
-      //   leadin: this.leadin,
-      //   orgnummer: this.orgnummer,
-      //   hemsida: this.hemsida,
-      //   address: this.address,
-      //   fskatt: this.fskatt
-      // })
-    }
-  },
+      store.dispatch({
+        type: 'saveAvdragAction',
+        percentage: this.percentage,
+        maxamount: this.maxamount
+      })
+    },
 
-  clearAvdrag() {
-    // TODO: implement
-    // store.dispatch('clearCompanyDataAction')
+    clearAvdrag() {
+      store.dispatch('clearAvdragAction')
+    }
   }
 })
 </script>

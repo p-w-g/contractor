@@ -85,3 +85,13 @@ export class addressModel {
     this.tva = ''
   }
 }
+
+export class avdragModel {
+  percentage: number
+  maxamount: number
+
+  constructor() {
+    this.percentage = 0
+    this.maxamount = 0
+  }
+}
