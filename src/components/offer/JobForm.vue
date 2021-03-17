@@ -1,9 +1,8 @@
 <template>
   <div class="fr__heading">
-    <header>
-      <h3>Nytt projekt</h3>
-
-      <div class="fr__column-wrap">
+    <h3>Nytt projekt</h3>
+    <header class="fr__header-form">
+      <div class="fr__column fr__column--left">
         <form class="fr__form" @submit.prevent="addLocation">
           <fieldset>
             <form-input
@@ -27,42 +26,40 @@
             <button class="fr__button--submit fr__button--funky">Spåra</button>
           </fieldset>
         </form>
-
+      </div>
+      <div class="fr__column fr__column--right">
         <form class="fr__form" @submit.prevent="addNewLabel">
           <fieldset>
             <form-input labelFull="Etapp" labelShort="labels" v-model="label" />
 
-            <button class="fr__button--submit fr__button--funky">Lägg till</button>
+            <button class="fr__button--submit fr__button--funky">
+              Lägg till
+            </button>
           </fieldset>
         </form>
 
         <form id="expenses-form" class="fr__form" @submit.prevent="addNewTask">
           <fieldset>
-            <div class="fr__label-wrapper">
-              <label for="description">Beskrivning</label>
-              <input
-                ref="desc"
-                id="description"
-                type="text"
-                v-model="task"
-                class="fr__input-box"
-              />
-            </div>
-            <div class="fr__label-wrapper">
-              <label for="amount">Summan</label>
-              <input
-                id="amount"
-                type="number"
-                v-model.number="amount"
-                class="fr__input-box"
-              />
-            </div>
-            <button class="fr__button--submit fr__button--funky">Lägg till</button>
+            <text-area
+              labelFull="Beskrivning"
+              labelShort="description"
+              v-model="task"
+            />
+
+            <form-input
+              labelFull="Summan"
+              labelShort="amount"
+              v-model.number="amount"
+            />
+
+            <button class="fr__button--submit fr__button--funky">
+              Lägg till
+            </button>
           </fieldset>
         </form>
       </div>
-      <hr />
     </header>
+    <hr />
   </div>
 </template>
 
@@ -70,6 +67,7 @@
 import { defineComponent } from 'vue'
 import store from '@/store/index'
 import FormInput from '../fsuic/FormInput.vue'
+import TextArea from '../fsuic/TextArea.vue'
 
 export default defineComponent({
   name: 'JobForm',
@@ -83,7 +81,8 @@ export default defineComponent({
     jobbstart: ''
   }),
   components: {
-    FormInput
+    FormInput,
+    TextArea
   },
   methods: {
     addNewLabel() {
