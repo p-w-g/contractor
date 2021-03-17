@@ -18,7 +18,6 @@ import { taskModel } from '@/store/models'
 
 export default defineComponent({
   name: 'Etapp',
-  data: () => ({}),
   components: {
     Tasks,
     Task
@@ -26,7 +25,9 @@ export default defineComponent({
   methods: {},
   computed: {
     unassignedTasks(): taskModel[] {
-      return store.state.job.filter((el) => el.Label === '')
+      if (store.state.job) {
+        return store.state.job.filter((el) => !el.Label)
+      }
     },
     unassignedAmounts(): Array<number> {
       return this.unassignedTasks.map((e) => e.Amount)

@@ -1,7 +1,9 @@
 <template>
-  <Foretag />
-  <Kontakt />
-  <Disclaimers />
+  <div>
+    <Foretag />
+    <Kontakt />
+    <Disclaimers />
+  </div>
 </template>
 
 <script lang="ts">

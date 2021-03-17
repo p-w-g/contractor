@@ -1,19 +1,32 @@
 <template>
-  <settings />
-  <new-offer />
+  <drawer />
+  <router-view v-slot="{ Component }">
+    <transition name="scale" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import NewOffer from './views/NewOffer.vue'
-import Settings from './views/Settings.vue'
+import Drawer from './components/fsuic/Drawer.vue'
 
 export default defineComponent({
   name: 'App',
-  components: { NewOffer, Settings }
+  components: {
+    Drawer
+  }
 })
 </script>
-
 <style lang="scss">
 @use './assets/fr-theme/common';
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 0.5s ease;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
 </style>
