@@ -2,7 +2,7 @@
   <div>
     <job-form />
     <overview />
-    <button class="fr__button--submit" @click="resetState">Reset</button>
+    <button class="fr__button--submit fr__button--funky" @click="resetState">Reset</button>
   </div>
 </template>
 <script lang="ts">

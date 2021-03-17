@@ -24,7 +24,7 @@
               v-model="jobbstart"
             />
 
-            <button class="fr__button--submit">Spåra</button>
+            <button class="fr__button--submit fr__button--funky">Spåra</button>
           </fieldset>
         </form>
 
@@ -32,7 +32,7 @@
           <fieldset>
             <form-input labelFull="Etapp" labelShort="labels" v-model="label" />
 
-            <button class="fr__button--submit">Lägg till</button>
+            <button class="fr__button--submit fr__button--funky">Lägg till</button>
           </fieldset>
         </form>
 
@@ -57,7 +57,7 @@
                 class="fr__input-box"
               />
             </div>
-            <button class="fr__button--submit">Lägg till</button>
+            <button class="fr__button--submit fr__button--funky">Lägg till</button>
           </fieldset>
         </form>
       </div>
