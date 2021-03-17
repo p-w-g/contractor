@@ -94,7 +94,8 @@ export default createStore({
         Description: pld.task,
         Amount: pld.amount,
         Id: state.latestID,
-        Label: ''
+        Label: '',
+        Deductible: false
       })
     },
 
@@ -112,8 +113,14 @@ export default createStore({
         Description: originalTask.Description,
         Amount: originalTask.Amount,
         Id: state.latestID,
-        Label: originalTask.Label
+        Label: originalTask.Label,
+        Deductible: originalTask.Deductible
       })
+    },
+
+    toggleDeductible(state, pld) {
+      const originalTask = state.job.find((el) => el.Id === pld)
+      originalTask.Deductible = !originalTask.Deductible
     },
 
     addlocationDescription(state, pld) {
@@ -131,7 +138,7 @@ export default createStore({
     },
 
     deleteTask(state, pld) {
-      const index = state.job.findIndex((el) => el.Id == pld.id)
+      const index = state.job.findIndex((el) => el.Id === pld.id)
       if (index != -1) state.job.splice(index, 1)
     },
 
@@ -275,6 +282,11 @@ export default createStore({
     clearAvdragAction(context) {
       context.commit('clearAvdrag')
       context.commit('saveAvdragJson')
+    },
+
+    toggleDeductibleAction(context, payload) {
+      context.commit('toggleDeductible', payload)
+      context.commit('saveJobJson')
     }
   },
   getters: {

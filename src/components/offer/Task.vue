@@ -17,7 +17,7 @@
       v-model="localAmount"
       @keydown.enter="toggleEditing(task.Id)"
     />
-    {{ !isEditable ? task.Amount : '' }}
+    {{ !isEditable ? dynamicAmount : '' }}
   </td>
 
   <td>
@@ -42,6 +42,13 @@
       <span @click="unassignLabel(task.Id)"> <img :src="UnassignIcon" /> </span>
 
       <span @click="cloneTask(task.Id)"> <img :src="CloneIcon" /> </span>
+
+      <span @click="toggleDeductible(task.Id)">
+        <img
+          :src="ConstructionIcon"
+          :class="task.Deductible ? 'colormepink' : ''"
+        />
+      </span>
     </div>
   </td>
 </template>
@@ -51,9 +58,10 @@ import DeleteIcon from '../../assets/delete.svg'
 import EditIcon from '../../assets/edit.svg'
 import UnassignIcon from '../../assets/bookmark_remove.svg'
 import CloneIcon from '../../assets/content_copy.svg'
-
+import ConstructionIcon from '../../assets/construction.svg'
 import { defineComponent } from 'vue'
 import store from '@/store/index'
+import { avdragModel } from '@/store/models'
 
 export default defineComponent({
   name: 'Task',
@@ -63,7 +71,8 @@ export default defineComponent({
       DeleteIcon,
       EditIcon,
       UnassignIcon,
-      CloneIcon
+      CloneIcon,
+      ConstructionIcon
     }
   },
   components: {},
@@ -76,6 +85,17 @@ export default defineComponent({
   computed: {
     labels(): Array<string> {
       return store.getters.labels
+    },
+    avdrag(): avdragModel {
+      return store.getters.avdrag
+    },
+    dynamicAmount(): string {
+      const reducedAmount =
+        (Number(this.task.Amount) * Number(this.avdrag.percentage)) / 100
+
+      return !this.task.Deductible
+        ? this.task.Amount
+        : `${this.task.Amount}, varav avdrag: ${reducedAmount}`
     }
   },
   props: {
@@ -132,6 +152,10 @@ export default defineComponent({
 
         return
       }
+    },
+
+    toggleDeductible(id: number) {
+      store.dispatch('toggleDeductibleAction', id)
     }
   }
 })

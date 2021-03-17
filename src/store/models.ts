@@ -3,12 +3,14 @@ export class taskModel {
   Amount: number
   Id: number
   Label: string
+  Deductible: boolean
 
   constructor() {
     this.Description = ''
     this.Amount = 0
     this.Id = 0
     this.Label = ''
+    this.Deductible = false
   }
 }
 export class locationModel {
