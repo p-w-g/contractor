@@ -242,7 +242,7 @@ export default createStore({
     },
 
     saveDisclaimersAction(context, payload) {
-      context.commit('addDísclaimers', payload)
+      context.commit('addDisclaimers', payload)
       context.commit('saveDisclaimersJson')
     },
 
