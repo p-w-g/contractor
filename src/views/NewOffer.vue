@@ -23,13 +23,7 @@ export default defineComponent({
     JobForm,
     Overview
   },
-  mounted() {
-    this.loadDataFromJson()
-  },
   methods: {
-    loadDataFromJson() {
-      store.dispatch('attemptLoadJsonAction')
-    },
     resetState() {
       store.dispatch('resetStateAction')
     }

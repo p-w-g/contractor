@@ -17,6 +17,8 @@ export default defineComponent({
     Drawer
   },
   mounted() {
+    store.dispatch('attemptLoadJsonAction')
+
     store.dispatch('attemptLoadSettingsAction')
   }
 })
