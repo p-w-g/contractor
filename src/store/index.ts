@@ -290,13 +290,9 @@ export default createStore({
     }
   },
   getters: {
-    amounts: (state): Array<number> => {
-      return state.job.length > 0 ? state.job.map((e) => e.Amount) : []
-    },
-
     deductedAmount: (state): number => {
-      const tasks = state.job.filter((el) => el.Deductible)
-      const amounts = tasks.map((e) => e.Amount)
+      const tasks: taskModel[] = state.job.filter((el) => el.Deductible)
+      const amounts: Array<number> = tasks.map((e) => e.Amount)
 
       return amounts.reduce(
         (acc: number, curr: number) => Number(acc) + Number(curr),
@@ -304,8 +300,10 @@ export default createStore({
       )
     },
 
-    grandTotal: (state, getters) => {
-      return getters.amounts.reduce(
+    grandTotal: (state, getters): number => {
+      const amounts: Array<number> = state.job.map((e) => e.Amount)
+
+      return amounts.reduce(
         (accumulator: number, current: number) => accumulator + Number(current),
         0
       )
