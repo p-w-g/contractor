@@ -294,6 +294,16 @@ export default createStore({
       return state.job.length > 0 ? state.job.map((e) => e.Amount) : []
     },
 
+    deductedAmount: (state): number => {
+      const tasks = state.job.filter((el) => el.Deductible)
+      const amounts = tasks.map((e) => e.Amount)
+
+      return amounts.reduce(
+        (acc: number, curr: number) => Number(acc) + Number(curr),
+        0
+      )
+    },
+
     grandTotal: (state, getters) => {
       return getters.amounts.reduce(
         (accumulator: number, current: number) => accumulator + Number(current),

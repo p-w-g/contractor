@@ -13,6 +13,10 @@
         <th>Total:</th>
         <th>{{ grandTotal }}</th>
       </tr>
+      <tr>
+        <th>Att betala:</th>
+        <th>{{ this.payable }}</th>
+      </tr>
       <tbody>
         <etapp />
       </tbody>
@@ -36,8 +40,18 @@ export default defineComponent({
     grandTotal(): number {
       return store.getters.grandTotal
     },
+
     location(): locationModel {
       return store.getters.location
+    },
+
+    percentage(): number {
+      return store.getters.avdrag.percentage
+    },
+
+    payable(): number {
+      const deducted = (store.getters.deductedAmount / 100) * this.percentage
+      return this.grandTotal - deducted
     }
   }
 })
