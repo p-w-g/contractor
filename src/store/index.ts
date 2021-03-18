@@ -143,9 +143,9 @@ export default createStore({
     },
 
     addRepDetails(state, pld) {
-      state.rep.names = pld.names
-      state.rep.mail = pld.mail
-      state.rep.mobile = pld.mobile
+      if (pld.names !== '') state.rep.names = pld.names
+      if (pld.mail !== '') state.rep.mail = pld.mail
+      if (pld.mobile !== '') state.rep.mobile = pld.mobile
     },
     clearRepDetails(state) {
       state.rep = {} as repModel
