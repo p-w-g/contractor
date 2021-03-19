@@ -2,7 +2,7 @@
   <div class="fr__heading">
     <h3>Företagsuppgifter</h3>
   </div>
-  <div class="">
+  <div>
     <form class="fr__form" @submit.prevent="saveCompany">
       <fieldset>
         <div class="fr__label-wrapper--image">
@@ -44,7 +44,7 @@
         <input type="checkbox" id="fskatt" v-model="fskatt" />
         <label for="fskatt">Godkänd för F-skatt?</label>
         <br />
-        <button class="fr__button--submit">Spåra</button>
+        <button class="fr__button--submit fr__button--funky">Spåra</button>
       </fieldset>
     </form>
   </div>
@@ -67,7 +67,9 @@
       <p>F-Skatt gödkänd: {{ this.companyData.fskatt ? 'Ja' : 'Nej' }}</p>
     </article>
   </div>
-  <button @click="clearCompany">Rensa Företagsuppgifter</button>
+  <button class="fr__button--submit fr__button--funky" @click="clearCompany">
+    Rensa Företagsuppgifter
+  </button>
 </template>
 
 <script lang="ts">

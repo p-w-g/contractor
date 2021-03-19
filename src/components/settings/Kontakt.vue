@@ -2,7 +2,7 @@
   <div class="fr__heading">
     <h3>Kontaktuppgifter</h3>
   </div>
-  <div class="">
+  <div>
     <form class="fr__form" @submit.prevent="saveRep">
       <fieldset>
         <form-input
@@ -23,7 +23,7 @@
           v-model="mobile"
         />
 
-        <button class="fr__button--submit">Spåra</button>
+        <button class="fr__button--submit fr__button--funky">Spåra</button>
       </fieldset>
     </form>
   </div>
@@ -36,7 +36,12 @@
       <p>Telefon: {{ this.repData.mobile }}</p>
     </article>
   </div>
-  <button @click="clearDisclaimers">Rensa vilkor</button>
+  <button
+    class="fr__button--submit fr__button--funky"
+    @click="clearDisclaimers"
+  >
+    Rensa vilkor
+  </button>
 </template>
 
 <script lang="ts">

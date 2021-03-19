@@ -1,7 +1,7 @@
 <template>
   <div class="fr__heading">
     <h3>Vilkor</h3>
-    <div class="">
+    <div>
       <header>
         <form class="fr__form" @submit.prevent="saveDisclaimers">
           <fieldset>
@@ -65,7 +65,9 @@
     </div>
   </div>
 
-  <button class="fr__button--submit" @click="saveDisclaimers">Spåra</button>
+  <button class="fr__button--submit fr__button--funky" @click="saveDisclaimers">
+    Spåra
+  </button>
   <hr />
   <div>
     <article>
@@ -81,7 +83,12 @@
       <p>ovrigt: {{ this.disclaimerData.ovrigt }}</p>
     </article>
   </div>
-  <button @click="clearDisclaimers">Rensa vilkor</button>
+  <button
+    class="fr__button--submit fr__button--funky"
+    @click="clearDisclaimers"
+  >
+    Rensa vilkor
+  </button>
 </template>
 
 <script lang="ts">
@@ -119,7 +126,7 @@ export default defineComponent({
         giltig: this.giltig,
         garanti: this.garanti,
         arbetstid: this.arbetstid,
-        försäkring: this.försäkring,
+        forsakring: this.forsakring,
         avvikelse: this.avvikelse,
         extra: this.extra,
         rot: this.rot,

@@ -3,7 +3,6 @@
     <label :for="labelShort">{{ labelFull }}</label>
     <input
       :id="labelShort"
-      type="text"
       class="fr__input-box"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
@@ -19,7 +18,7 @@ export default defineComponent({
   props: {
     labelFull: String,
     labelShort: String,
-    modelValue: String
+    modelValue: [String, Number]
   }
 })
 </script>

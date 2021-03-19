@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr v-if="filteredTasks.legth > 0">
     <th>{{ etapp }}</th>
     <th>{{ filteredSum }}</th>
   </tr>

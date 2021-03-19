@@ -4,7 +4,8 @@ import {
   locationModel,
   repModel,
   companyModel,
-  disclaimerModel
+  disclaimerModel,
+  avdragModel
 } from './models'
 
 export default createStore({
@@ -15,7 +16,8 @@ export default createStore({
     location: new locationModel(),
     rep: new repModel(),
     company: new companyModel(),
-    disclaimers: new disclaimerModel()
+    disclaimers: new disclaimerModel(),
+    avdrag: new avdragModel()
   },
 
   mutations: {
@@ -33,6 +35,7 @@ export default createStore({
       state.disclaimers = JSON.parse(
         localStorage.getItem('disclaimers') || '{}'
       )
+      state.avdrag = JSON.parse(localStorage.getItem('avdrag') || '{}')
     },
 
     saveJobJson(state) {
@@ -57,6 +60,10 @@ export default createStore({
 
     saveDisclaimersJson(state) {
       localStorage.setItem('disclaimers', JSON.stringify(state.disclaimers))
+    },
+
+    saveAvdragJson(state) {
+      localStorage.setItem('avdrag', JSON.stringify(state.avdrag))
     },
 
     resetState(state) {
@@ -87,7 +94,8 @@ export default createStore({
         Description: pld.task,
         Amount: pld.amount,
         Id: state.latestID,
-        Label: ''
+        Label: '',
+        Deductible: false
       })
     },
 
@@ -105,8 +113,14 @@ export default createStore({
         Description: originalTask.Description,
         Amount: originalTask.Amount,
         Id: state.latestID,
-        Label: originalTask.Label
+        Label: originalTask.Label,
+        Deductible: originalTask.Deductible
       })
+    },
+
+    toggleDeductible(state, pld) {
+      const originalTask = state.job.find((el) => el.Id === pld)
+      originalTask.Deductible = !originalTask.Deductible
     },
 
     addlocationDescription(state, pld) {
@@ -124,14 +138,14 @@ export default createStore({
     },
 
     deleteTask(state, pld) {
-      const index = state.job.findIndex((el) => el.Id == pld.id)
+      const index = state.job.findIndex((el) => el.Id === pld.id)
       if (index != -1) state.job.splice(index, 1)
     },
 
     addRepDetails(state, pld) {
-      state.rep.names = pld.names
-      state.rep.mail = pld.mail
-      state.rep.mobile = pld.mobile
+      if (pld.names !== '') state.rep.names = pld.names
+      if (pld.mail !== '') state.rep.mail = pld.mail
+      if (pld.mobile !== '') state.rep.mobile = pld.mobile
     },
     clearRepDetails(state) {
       state.rep = {} as repModel
@@ -156,7 +170,7 @@ export default createStore({
       if (pld.giltig !== '') state.disclaimers.giltig = pld.giltig
       if (pld.garanti !== '') state.disclaimers.garanti = pld.garanti
       if (pld.arbetstid !== '') state.disclaimers.arbetstid = pld.arbetstid
-      if (pld.försäkring !== '') state.disclaimers.försäkring = pld.försäkring
+      if (pld.forsakring !== '') state.disclaimers.forsakring = pld.forsakring
       if (pld.avvikelse !== '') state.disclaimers.avvikelse = pld.avvikelse
       if (pld.extra !== '') state.disclaimers.extra = pld.extra
       if (pld.rot !== '') state.disclaimers.rot = pld.rot
@@ -165,6 +179,15 @@ export default createStore({
 
     clearDisclaimers(state) {
       state.disclaimers = {} as disclaimerModel
+    },
+
+    addAvdrag(state, pld) {
+      state.avdrag.percentage = pld.percentage
+      state.avdrag.maxamount = pld.maxamount
+    },
+
+    clearAvdrag(state) {
+      state.avdrag = {} as avdragModel
     }
   },
   actions: {
@@ -249,15 +272,38 @@ export default createStore({
     clearDisclaimersAction(context) {
       context.commit('clearDisclaimers')
       context.commit('saveDisclaimersJson')
+    },
+
+    saveAvdragAction(context, payload) {
+      context.commit('addAvdrag', payload)
+      context.commit('saveAvdragJson')
+    },
+
+    clearAvdragAction(context) {
+      context.commit('clearAvdrag')
+      context.commit('saveAvdragJson')
+    },
+
+    toggleDeductibleAction(context, payload) {
+      context.commit('toggleDeductible', payload)
+      context.commit('saveJobJson')
     }
   },
   getters: {
-    amounts: (state): Array<number> => {
-      return state.job.length > 0 ? state.job.map((e) => e.Amount) : []
+    deductedAmount: (state): number => {
+      const tasks: taskModel[] = state.job.filter((el) => el.Deductible)
+      const amounts: Array<number> = tasks.map((e) => e.Amount)
+
+      return amounts.reduce(
+        (acc: number, curr: number) => Number(acc) + Number(curr),
+        0
+      )
     },
 
-    grandTotal: (state, getters) => {
-      return getters.amounts.reduce(
+    grandTotal: (state, getters): number => {
+      const amounts: Array<number> = state.job.map((e) => e.Amount)
+
+      return amounts.reduce(
         (accumulator: number, current: number) => accumulator + Number(current),
         0
       )
@@ -281,6 +327,10 @@ export default createStore({
 
     rep: (state): repModel => {
       return state.rep
+    },
+
+    avdrag: (state): avdragModel => {
+      return state.avdrag
     }
   }
 })

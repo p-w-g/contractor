@@ -2,7 +2,12 @@
   <div>
     <job-form />
     <overview />
-    <button class="fr__button--submit" @click="resetState">Reset</button>
+    <button class="fr__button--submit fr__button--funky" @click="resetState">
+      Reset
+    </button>
+    <button class="fr__button--submit fr__button--funky">
+      <router-link to="/preview" target="_blank">Preview</router-link>
+    </button>
   </div>
 </template>
 <script lang="ts">
@@ -18,13 +23,7 @@ export default defineComponent({
     JobForm,
     Overview
   },
-  mounted() {
-    this.loadDataFromJson()
-  },
   methods: {
-    loadDataFromJson() {
-      store.dispatch('attemptLoadJsonAction')
-    },
     resetState() {
       store.dispatch('resetStateAction')
     }

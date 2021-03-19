@@ -3,12 +3,14 @@ export class taskModel {
   Amount: number
   Id: number
   Label: string
+  Deductible: boolean
 
   constructor() {
     this.Description = ''
     this.Amount = 0
     this.Id = 0
     this.Label = ''
+    this.Deductible = false
   }
 }
 export class locationModel {
@@ -38,7 +40,7 @@ export class disclaimerModel {
   giltig: string
   garanti: string
   arbetstid: string
-  försäkring: string
+  forsakring: string
   avvikelse: string
   extra: string
   rot: string
@@ -49,7 +51,7 @@ export class disclaimerModel {
     this.giltig = ''
     this.garanti = ''
     this.arbetstid = ''
-    this.försäkring = ''
+    this.forsakring = ''
     this.avvikelse = ''
     this.extra = ''
     this.rot = ''
@@ -83,5 +85,15 @@ export class addressModel {
   constructor() {
     this.ett = ''
     this.tva = ''
+  }
+}
+
+export class avdragModel {
+  percentage: number
+  maxamount: number
+
+  constructor() {
+    this.percentage = 0
+    this.maxamount = 0
   }
 }
