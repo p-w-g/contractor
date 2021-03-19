@@ -1,0 +1,33 @@
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./assets/Quicksand-VariableFont.ttf') format('truetype');
+}
+
+// primes
+
+$prime__bg: #fefefe;
+$alt__bg: #eee;
+$prime__text: #2c3e50;
+$prime__shadow: #92bfb1;
+
+// fr--formal theme
+
+$state-danger: #d62839;
+$state-danger-alt: #ee6352;
+$state-alert: #f98948;
+$state-notice: #ff5e5b;
+$state-freeze: #a4b0f5;
+
+$formal-mint: #92bfb1;
+$formal-beige: #ab947e;
+$formal-green: #6f8f72;
+
+// fr--electric theme
+
+$electric-mint: #97ead2;
+$electric-blue: #477998;
+$electric-skyblue: #00d4ff;
+$electric-razzie: #d81159;
+$electric-yellow: #fde74c;
+$electric-orange: #ff8200;
+$electric-pink: #e0bad7;
