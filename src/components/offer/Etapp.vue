@@ -1,5 +1,5 @@
 <template>
-  <tr v-if="unassignedTasks.length > 0">
+  <tr v-if="unassignedTasks">
     <th>Obestämd</th>
     <th>{{ unassignedSum }}</th>
   </tr>
@@ -25,18 +25,22 @@ export default defineComponent({
   methods: {},
   computed: {
     unassignedTasks(): taskModel[] {
-      if (store.state.job) {
+      if (store.state.job.length > 0) {
         return store.state.job.filter((el) => !el.Label)
       }
     },
     unassignedAmounts(): Array<number> {
-      return this.unassignedTasks.map((e) => e.Amount)
+      if (this.unassignedTasks.length > 0) {
+        return this.unassignedTasks.map((e) => e.Amount)
+      }
     },
     unassignedSum(): number {
-      return this.unassignedAmounts.reduce(
-        (acc: number, curr: number) => acc + Number(curr),
-        0
-      )
+      if (this.unassignedAmounts.length > 0) {
+        return this.unassignedAmounts.reduce(
+          (acc: number, curr: number) => acc + Number(curr),
+          0
+        )
+      }
     },
     labels(): Array<string> {
       return store.getters.labels

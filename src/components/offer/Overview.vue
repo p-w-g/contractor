@@ -38,7 +38,11 @@ export default defineComponent({
   data: () => ({}),
   computed: {
     grandTotal(): number {
-      return store.getters.grandTotal
+      const total = store.getters.grandTotal
+      if (total === undefined || total === null || Number.isNaN(total)) {
+        return 0
+      }
+      return total
     },
 
     location(): locationModel {
@@ -50,7 +54,15 @@ export default defineComponent({
     },
 
     payable(): number {
-      const deducted = (store.getters.deductedAmount / 100) * this.percentage
+      const deductable = store.getters.deductedAmount
+      if (
+        deductable === undefined ||
+        deductable === null ||
+        Number.isNaN(deductable)
+      ) {
+        return 0
+      }
+      const deducted = (deductable / 100) * this.percentage
       return this.grandTotal - deducted
     }
   }
