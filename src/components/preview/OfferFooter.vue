@@ -1,7 +1,7 @@
 <template>
   <footer>
-    <div class="grid__container">
-      <div class="grid__col--1 grid__col">
+    <div class="fot-grid__container">
+      <div class="fot-grid__col--1 fot-grid__col">
         <ul>
           <li>
             <b>{{ this.companyData.hemsida }}</b>
@@ -12,14 +12,14 @@
           <li>{{ this.companyData.fskatt ? 'Godkänd för F-Skatt' : '' }}</li>
         </ul>
       </div>
-      <div class="grid__col--2 grid__col">
+      <div class="fot-grid__col--2 fot-grid__col">
         <ul>
           <li>
             <b>{{ this.date }}</b>
           </li>
         </ul>
       </div>
-      <div class="grid__col--3 grid__col">
+      <div class="fot-grid__col--3 fot-grid__col">
         <ul>
           <li><b>Kontaktuppgifter</b></li>
           <li>{{ this.repData.names }}</li>
@@ -50,11 +50,10 @@ export default defineComponent({
 })
 </script>
 <style lang="scss">
-.grid {
+.fot-grid {
   &__container {
     display: grid;
-    grid-template-columns: 30px repeat(3, 1fr) 20px;
-    page-break-after: always;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   &__col {
     text-align: left;
@@ -66,16 +65,16 @@ export default defineComponent({
     }
 
     &--1 {
-      grid-column-start: 2;
+      grid-column-start: 1;
     }
 
     &--2 {
-      grid-column-start: 3;
+      grid-column-start: 2;
       text-align: center;
     }
 
     &--3 {
-      grid-column-start: 4;
+      grid-column-start: 3;
       text-align: right;
     }
   }
