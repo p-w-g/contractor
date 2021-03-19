@@ -170,7 +170,7 @@ export default createStore({
       if (pld.giltig !== '') state.disclaimers.giltig = pld.giltig
       if (pld.garanti !== '') state.disclaimers.garanti = pld.garanti
       if (pld.arbetstid !== '') state.disclaimers.arbetstid = pld.arbetstid
-      if (pld.försäkring !== '') state.disclaimers.försäkring = pld.försäkring
+      if (pld.forsakring !== '') state.disclaimers.forsakring = pld.forsakring
       if (pld.avvikelse !== '') state.disclaimers.avvikelse = pld.avvikelse
       if (pld.extra !== '') state.disclaimers.extra = pld.extra
       if (pld.rot !== '') state.disclaimers.rot = pld.rot

@@ -2,7 +2,7 @@
   <div class="fr__heading">
     <h3>Företagsuppgifter</h3>
   </div>
-  <div class="">
+  <div>
     <form class="fr__form" @submit.prevent="saveCompany">
       <fieldset>
         <div class="fr__label-wrapper--image">

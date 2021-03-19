@@ -40,7 +40,7 @@ export class disclaimerModel {
   giltig: string
   garanti: string
   arbetstid: string
-  försäkring: string
+  forsakring: string
   avvikelse: string
   extra: string
   rot: string
@@ -51,7 +51,7 @@ export class disclaimerModel {
     this.giltig = ''
     this.garanti = ''
     this.arbetstid = ''
-    this.försäkring = ''
+    this.forsakring = ''
     this.avvikelse = ''
     this.extra = ''
     this.rot = ''

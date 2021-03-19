@@ -2,7 +2,7 @@
   <div class="fr__heading">
     <h3>Kontaktuppgifter</h3>
   </div>
-  <div class="">
+  <div>
     <form class="fr__form" @submit.prevent="saveRep">
       <fieldset>
         <form-input

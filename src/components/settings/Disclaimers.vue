@@ -1,7 +1,7 @@
 <template>
   <div class="fr__heading">
     <h3>Vilkor</h3>
-    <div class="">
+    <div>
       <header>
         <form class="fr__form" @submit.prevent="saveDisclaimers">
           <fieldset>
@@ -126,7 +126,7 @@ export default defineComponent({
         giltig: this.giltig,
         garanti: this.garanti,
         arbetstid: this.arbetstid,
-        försäkring: this.försäkring,
+        forsakring: this.forsakring,
         avvikelse: this.avvikelse,
         extra: this.extra,
         rot: this.rot,
