@@ -49,6 +49,7 @@ footer {
     bottom: 0;
     left: 0;
     width: calc(95vw - 100px);
+    max-width: calc(95vw - 100px);
     margin: 0 70px;
   }
   h4 {
@@ -64,8 +65,8 @@ footer {
   }
 
   .page-container {
-    width: calc(95vw - 140px);
-    max-width: calc(95vw - 140px);
+    width: calc(95vw - 100px);
+    max-width: calc(95vw - 100px);
     margin: 100px 70px auto;
 
     height: calc(85vh - 200px);
