@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="unprintable">
     <input
       class="kebab"
       type="image"
@@ -11,7 +11,7 @@
 
     <teleport to="body">
       <transition name="slide-fade">
-        <ul v-if="isOpen" class="nav">
+        <ul v-if="isOpen" class="nav unprintable">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/offer">Offert</router-link></li>
           <li><router-link to="/settings">Inställningar</router-link></li>
