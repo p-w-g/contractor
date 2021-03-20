@@ -31,7 +31,7 @@ export default defineComponent({
       KebabMenu
     }
   },
-  data: () => ({ isOpen: false }),
+  data: () => ({ isOpen: true }),
   methods: {
     toggleDrawer() {
       if (this.isOpen) {
