@@ -90,9 +90,14 @@ export default defineComponent({
       return store.getters.avdrag
     },
     dynamicAmount(): string {
-      const reducedAmount =
-        (Number(this.task.Amount) * Number(this.avdrag.percentage)) / 100
+      let percentage =
+        Number.isNaN(this.avdrag.percentage) ||
+        this.avdrag.percentage === undefined ||
+        this.avdrag.percentage === null
+          ? 0
+          : Number(this.avdrag.percentage)
 
+      const reducedAmount = (Number(this.task.Amount) * percentage) / 100
       return !this.task.Deductible
         ? this.task.Amount
         : `${this.task.Amount}, varav avdrag: ${reducedAmount}`
