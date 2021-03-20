@@ -24,7 +24,8 @@ export default defineComponent({
 })
 </script>
 <style lang="scss">
-@use './assets/fr-theme/common';
+@use '@/assets/common';
+
 .scale-enter-active,
 .scale-leave-active {
   transition: all 0.5s ease;

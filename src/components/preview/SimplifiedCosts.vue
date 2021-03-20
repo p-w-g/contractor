@@ -27,17 +27,40 @@ export default defineComponent({
   data: () => ({}),
   computed: {
     grandTotal(): number {
-      return store.getters.grandTotal
+      const total = store.getters.grandTotal
+      if (total === undefined || total === null || Number.isNaN(total)) {
+        return 0
+      }
+      return total
     },
 
     percentage(): number {
-      return store.getters.avdrag.percentage
+      const percentage = store.getters.avdrag.percentage
+      if (
+        percentage === undefined ||
+        percentage === null ||
+        Number.isNaN(percentage)
+      ) {
+        return 0
+      }
+      return percentage
     },
 
     deducted(): number {
-      return (store.getters.deductedAmount / 100) * this.percentage
+      const deductedAmount = store.getters.deductedAmount
+      if (
+        deductedAmount === undefined ||
+        deductedAmount === null ||
+        Number.isNaN(deductedAmount)
+      ) {
+        return 0
+      }
+      return (deductedAmount / 100) * this.percentage
     },
     payable(): number {
+      if (this.grandTotal === 0) {
+        return 0
+      }
       return this.grandTotal - this.deducted
     }
   }
