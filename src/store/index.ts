@@ -22,20 +22,44 @@ export default createStore({
 
   mutations: {
     loadAllJson(state) {
-      state.job = JSON.parse(localStorage.getItem('job') || '{}')
-      state.etappLabels = JSON.parse(
-        localStorage.getItem('etappLabels') || '{}'
-      )
-      state.location = JSON.parse(localStorage.getItem('location') || '{}')
+      if (JSON.parse(localStorage.getItem('job'))) {
+        state.job = JSON.parse(localStorage.getItem('job'))
+      } else {
+        state.job = []
+      }
+      if (JSON.parse(localStorage.getItem('etappLabels'))) {
+        state.etappLabels = JSON.parse(localStorage.getItem('etappLabels'))
+      } else {
+        state.etappLabels = []
+      }
+      if (JSON.parse(localStorage.getItem('location'))) {
+        state.location = JSON.parse(localStorage.getItem('location'))
+      } else {
+        state.location = {} as locationModel
+      }
     },
 
     loadSettingsJson(state) {
-      state.rep = JSON.parse(localStorage.getItem('rep') || '{}')
-      state.company = JSON.parse(localStorage.getItem('company') || '{}')
-      state.disclaimers = JSON.parse(
-        localStorage.getItem('disclaimers') || '{}'
-      )
-      state.avdrag = JSON.parse(localStorage.getItem('avdrag') || '{}')
+      if (JSON.parse(localStorage.getItem('rep'))) {
+        state.rep = JSON.parse(localStorage.getItem('rep'))
+      } else {
+        state.rep = {} as repModel
+      }
+      if (JSON.parse(localStorage.getItem('company'))) {
+        state.company = JSON.parse(localStorage.getItem('company'))
+      } else {
+        state.company = {} as companyModel
+      }
+      if (JSON.parse(localStorage.getItem('avdrag'))) {
+        state.avdrag = JSON.parse(localStorage.getItem('avdrag'))
+      } else {
+        state.avdrag = {} as avdragModel
+      }
+      if (JSON.parse(localStorage.getItem('disclaimers'))) {
+        state.disclaimers = JSON.parse(localStorage.getItem('disclaimers'))
+      } else {
+        state.disclaimers = {} as disclaimerModel
+      }
     },
 
     saveJobJson(state) {
