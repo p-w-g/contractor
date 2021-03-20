@@ -119,11 +119,11 @@ export default defineComponent({
         address: this.address,
         fskatt: this.fskatt
       })
-    }
-  },
+    },
 
-  clearCompany() {
-    store.dispatch('clearCompanyDataAction')
+    clearCompany() {
+      store.dispatch('clearCompanyDataAction')
+    }
   }
 })
 </script>
