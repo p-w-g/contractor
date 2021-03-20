@@ -35,6 +35,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+footer {
+  width: 60vw;
+  margin: auto;
+}
 @media print {
   .pagebreak {
     clear: both;
