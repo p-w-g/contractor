@@ -44,6 +44,7 @@
               labelFull="Beskrivning"
               labelShort="description"
               v-model="task"
+              required
             />
 
             <form-input
@@ -90,14 +91,15 @@ export default defineComponent({
       this.label = ''
     },
     addNewTask() {
-      store.dispatch({
-        type: 'addNewTaskAction',
-        task: this.task,
-        amount: this.amount
-      })
+      if (this.task && this.task !== '') {
+        store.dispatch({
+          type: 'addNewTaskAction',
+          task: this.task,
+          amount: this.amount
+        })
+      }
       this.task = ''
       this.amount = ''
-      ;(this.$refs.desc as HTMLElement).focus()
     },
     addLocation() {
       store.dispatch({

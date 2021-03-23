@@ -114,13 +114,15 @@ export default createStore({
     },
 
     addNewTask(state, pld) {
-      state.job.push({
-        Description: pld.task,
-        Amount: pld.amount,
-        Id: state.latestID,
-        Label: '',
-        Deductible: false
-      })
+      if (pld.task) {
+        state.job.push({
+          Description: pld.task,
+          Amount: pld.amount,
+          Id: state.latestID,
+          Label: '',
+          Deductible: false
+        })
+      }
     },
 
     updateTask(state, pld) {
