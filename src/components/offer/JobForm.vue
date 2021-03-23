@@ -30,7 +30,12 @@
       <div class="fr__column fr__column--right">
         <form class="fr__form" @submit.prevent="addNewLabel">
           <fieldset>
-            <form-input labelFull="Etapp" labelShort="labels" v-model="label" />
+            <form-input
+              labelFull="Etapp"
+              labelShort="labels"
+              v-model="label"
+              required
+            />
 
             <button class="fr__button--submit fr__button--funky">
               Lägg till

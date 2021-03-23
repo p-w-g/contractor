@@ -110,7 +110,9 @@ export default createStore({
     },
 
     addNewLabel(state, pld) {
-      state.etappLabels.push(pld)
+      if (pld && pld !== '') {
+        state.etappLabels.push(pld)
+      }
     },
 
     addNewTask(state, pld) {

@@ -6,6 +6,7 @@
       class="fr__input-box"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
+      :required="required"
     />
   </div>
 </template>
@@ -18,7 +19,8 @@ export default defineComponent({
   props: {
     labelFull: String,
     labelShort: String,
-    modelValue: [String, Number]
+    modelValue: [String, Number],
+    required: Boolean
   }
 })
 </script>
