@@ -31,7 +31,7 @@ export default defineComponent({
       Chevron
     }
   },
-  data: () => ({ isOpen: true }),
+  data: () => ({ isOpen: false }),
   methods: {
     toggleDrawer() {
       if (this.isOpen) {
