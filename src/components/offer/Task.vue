@@ -21,13 +21,8 @@
   </td>
 
   <td>
-    <select v-model="selected" @change="assignLabel">
-      <option
-        v-for="(label, i) in labels"
-        :value="label"
-        :key="i"
-        :selected="label === task.label"
-      >
+    <select v-model="selected" @change="assignLabel" name="labels">
+      <option v-for="(label, i) in labels" :value="label" :key="i">
         {{ label }}
       </option>
     </select>
@@ -37,7 +32,9 @@
     <div class="fr__img-wrapper">
       <span @click="deleteTask(task.Id)"> <img :src="DeleteIcon" /> </span>
 
-      <span @click="toggleEditing(task.Id)"> <img :src="EditIcon" /> </span>
+      <span @click="toggleEditing(task.Id)">
+        <img :src="EditIcon" :class="isEditable ? 'toggled' : ''" />
+      </span>
 
       <span @click="unassignLabel(task.Id)"> <img :src="UnassignIcon" /> </span>
 
@@ -46,7 +43,7 @@
       <span @click="toggleDeductible(task.Id)">
         <img
           :src="ConstructionIcon"
-          :class="task.Deductible ? 'colormepink' : ''"
+          :class="task.Deductible ? 'toggled' : ''"
         />
       </span>
     </div>
@@ -90,9 +87,14 @@ export default defineComponent({
       return store.getters.avdrag
     },
     dynamicAmount(): string {
-      const reducedAmount =
-        (Number(this.task.Amount) * Number(this.avdrag.percentage)) / 100
+      let percentage =
+        Number.isNaN(this.avdrag.percentage) ||
+        this.avdrag.percentage === undefined ||
+        this.avdrag.percentage === null
+          ? 0
+          : Number(this.avdrag.percentage)
 
+      const reducedAmount = (Number(this.task.Amount) * percentage) / 100
       return !this.task.Deductible
         ? this.task.Amount
         : `${this.task.Amount}, varav avdrag: ${reducedAmount}`
@@ -108,6 +110,7 @@ export default defineComponent({
         label: this.selected,
         id: this.task?.Id
       })
+      this.selected = ''
     },
 
     deleteTask(id: number) {

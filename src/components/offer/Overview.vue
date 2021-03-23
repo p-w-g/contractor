@@ -50,6 +50,9 @@ export default defineComponent({
     },
 
     percentage(): number {
+      if (Number.isNaN(store.getters.avdrag.percentage)) {
+        return 0
+      }
       return store.getters.avdrag.percentage
     },
 
@@ -58,7 +61,10 @@ export default defineComponent({
       if (
         deductable === undefined ||
         deductable === null ||
-        Number.isNaN(deductable)
+        Number.isNaN(deductable) ||
+        this.percentage === undefined ||
+        this.percentage === null ||
+        Number.isNaN(this.percentage)
       ) {
         return 0
       }

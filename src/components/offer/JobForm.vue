@@ -30,7 +30,12 @@
       <div class="fr__column fr__column--right">
         <form class="fr__form" @submit.prevent="addNewLabel">
           <fieldset>
-            <form-input labelFull="Etapp" labelShort="labels" v-model="label" />
+            <form-input
+              labelFull="Etapp"
+              labelShort="labels"
+              v-model="label"
+              required
+            />
 
             <button class="fr__button--submit fr__button--funky">
               Lägg till
@@ -44,6 +49,8 @@
               labelFull="Beskrivning"
               labelShort="description"
               v-model="task"
+              ref="desc"
+              required
             />
 
             <form-input
@@ -90,14 +97,16 @@ export default defineComponent({
       this.label = ''
     },
     addNewTask() {
-      store.dispatch({
-        type: 'addNewTaskAction',
-        task: this.task,
-        amount: this.amount
-      })
+      if (this.task && this.task !== '') {
+        store.dispatch({
+          type: 'addNewTaskAction',
+          task: this.task,
+          amount: this.amount
+        })
+      }
       this.task = ''
       this.amount = ''
-      ;(this.$refs.desc as HTMLElement).focus()
+      this.$refs.desc.$el.children[1].focus()
     },
     addLocation() {
       store.dispatch({

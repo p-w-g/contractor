@@ -25,17 +25,17 @@ export default defineComponent({
   methods: {},
   computed: {
     unassignedTasks(): taskModel[] {
-      if (store.state.job.length > 0) {
+      if (store.state && store.state.job.length > 0) {
         return store.state.job.filter((el) => !el.Label)
       }
     },
     unassignedAmounts(): Array<number> {
-      if (this.unassignedTasks.length > 0) {
+      if (this.unassignedTasks && this.unassignedTasks.length > 0) {
         return this.unassignedTasks.map((e) => e.Amount)
       }
     },
     unassignedSum(): number {
-      if (this.unassignedAmounts.length > 0) {
+      if (this.unassignedAmounts && this.unassignedAmounts.length > 0) {
         return this.unassignedAmounts.reduce(
           (acc: number, curr: number) => acc + Number(curr),
           0

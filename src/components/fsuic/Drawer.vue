@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div class="unprintable">
     <input
-      class="kebab"
+      class="drawer"
       type="image"
-      :src="KebabMenu"
+      :src="Chevron"
       alt="Navigation Drawer"
       @click="toggleDrawer"
-      :class="isOpen ? 'kebab--open' : 'kebab--close'"
+      :class="isOpen ? 'drawer--open' : 'drawer--close'"
     />
 
     <teleport to="body">
       <transition name="slide-fade">
-        <ul v-if="isOpen" class="nav">
+        <ul v-if="isOpen" class="nav unprintable">
           <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/offer">Offert</router-link></li>
           <li><router-link to="/settings">Inställningar</router-link></li>
@@ -22,13 +22,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import KebabMenu from '../../assets/more_vert.svg'
+import Chevron from '../../assets/chevron_right.svg'
 
 export default defineComponent({
   name: 'Drawer',
   setup() {
     return {
-      KebabMenu
+      Chevron
     }
   },
   data: () => ({ isOpen: false }),

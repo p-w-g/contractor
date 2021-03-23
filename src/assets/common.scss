@@ -64,25 +64,31 @@ td {
 th {
   padding: 0 3px;
 }
-.colormepink {
-  background: variables.$electric-razzie;
+.toggled {
+  background: variables.$electric-orange;
   border-radius: 4px;
 }
-.kebab {
-  position: absolute;
+.drawer {
+  position: fixed;
   top: 0;
   left: 0px;
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
   border-bottom-right-radius: 5px;
+  background: radial-gradient(variables.$prime__bg 0%, variables.$alt__bg 75%);
   &--open {
-    transform: translateX(147px);
+    transform: translateX(147px) rotate(180deg);
 
     background: variables.$prime__bg;
   }
 }
+
+.link--silent {
+  color: variables.$prime__text;
+  text-decoration: none;
+}
 .nav {
   padding: 18px;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   margin-top: 0;
@@ -102,7 +108,7 @@ th {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

@@ -104,7 +104,7 @@ export default defineComponent({
       const image = (e.target as HTMLInputElement).files[0]
       const reader = new FileReader()
       reader.readAsDataURL(image)
-      reader.onload = (e: any) => {
+      reader.onload = (e) => {
         this.previewImage = e.target.result
       }
     },
@@ -119,11 +119,11 @@ export default defineComponent({
         address: this.address,
         fskatt: this.fskatt
       })
-    }
-  },
+    },
 
-  clearCompany() {
-    store.dispatch('clearCompanyDataAction')
+    clearCompany() {
+      store.dispatch('clearCompanyDataAction')
+    }
   }
 })
 </script>
