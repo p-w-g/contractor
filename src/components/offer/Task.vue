@@ -21,13 +21,8 @@
   </td>
 
   <td>
-    <select v-model="selected" @change="assignLabel">
-      <option
-        v-for="(label, i) in labels"
-        :value="label"
-        :key="i"
-        :selected="label === task.label"
-      >
+    <select v-model="selected" @change="assignLabel" name="labels">
+      <option v-for="(label, i) in labels" :value="label" :key="i">
         {{ label }}
       </option>
     </select>
@@ -113,6 +108,7 @@ export default defineComponent({
         label: this.selected,
         id: this.task?.Id
       })
+      this.selected = ''
     },
 
     deleteTask(id: number) {
