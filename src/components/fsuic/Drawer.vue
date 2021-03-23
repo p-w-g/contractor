@@ -1,12 +1,12 @@
 <template>
   <div class="unprintable">
     <input
-      class="kebab"
+      class="drawer"
       type="image"
-      :src="KebabMenu"
+      :src="Chevron"
       alt="Navigation Drawer"
       @click="toggleDrawer"
-      :class="isOpen ? 'kebab--open' : 'kebab--close'"
+      :class="isOpen ? 'drawer--open' : 'drawer--close'"
     />
 
     <teleport to="body">
@@ -22,13 +22,13 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import KebabMenu from '../../assets/more_vert.svg'
+import Chevron from '../../assets/chevron_right.svg'
 
 export default defineComponent({
   name: 'Drawer',
   setup() {
     return {
-      KebabMenu
+      Chevron
     }
   },
   data: () => ({ isOpen: true }),
