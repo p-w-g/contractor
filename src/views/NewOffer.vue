@@ -6,7 +6,9 @@
       Reset
     </button>
     <button class="fr__button--submit fr__button--funky">
-      <router-link to="/preview" target="_blank">Preview</router-link>
+      <router-link to="/preview" class="link--silent" target="_blank"
+        >Preview</router-link
+      >
     </button>
   </div>
 </template>
@@ -30,5 +32,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style></style>

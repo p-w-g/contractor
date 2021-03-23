@@ -7,7 +7,13 @@
     <third-page />
     <div class="pagebreak"></div>
     <offer-footer />
-    <button class="unprintable" @click="print">Print</button>
+    <button
+      id="print"
+      class="unprintable fr__button--submit fr__button--funky"
+      @click="print"
+    >
+      Print
+    </button>
   </div>
 </template>
 <script lang="ts">
@@ -39,11 +45,17 @@ footer {
   width: 60vw;
   margin: auto;
 }
+
+#print {
+  margin-bottom: 18px;
+}
+
 @media print {
   .pagebreak {
     clear: both;
     page-break-after: always;
   }
+
   footer {
     position: fixed;
     bottom: 0;
@@ -52,6 +64,7 @@ footer {
     max-width: calc(95vw - 100px);
     margin: 0 70px;
   }
+
   h4 {
     margin: 0;
   }
@@ -59,6 +72,7 @@ footer {
   html {
     background: none;
   }
+
   .kebab,
   .unprintable {
     display: none;
@@ -78,6 +92,7 @@ footer {
     display: flex;
     flex-direction: column;
   }
+
   .flex-wrap {
     display: flex;
     flex-direction: column;
@@ -94,6 +109,7 @@ footer {
   .col-left {
     min-width: 150px;
   }
+
   .col-right {
     max-width: 60vw;
     text-align: left;

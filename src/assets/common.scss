@@ -64,8 +64,8 @@ td {
 th {
   padding: 0 3px;
 }
-.colormepink {
-  background: variables.$electric-razzie;
+.toggled {
+  background: variables.$electric-orange;
   border-radius: 4px;
 }
 .kebab {
@@ -79,6 +79,11 @@ th {
 
     background: variables.$prime__bg;
   }
+}
+
+.link--silent {
+  color: variables.$prime__text;
+  text-decoration: none;
 }
 .nav {
   padding: 18px;

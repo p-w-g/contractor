@@ -32,7 +32,9 @@
     <div class="fr__img-wrapper">
       <span @click="deleteTask(task.Id)"> <img :src="DeleteIcon" /> </span>
 
-      <span @click="toggleEditing(task.Id)"> <img :src="EditIcon" /> </span>
+      <span @click="toggleEditing(task.Id)">
+        <img :src="EditIcon" :class="isEditable ? 'toggled' : ''" />
+      </span>
 
       <span @click="unassignLabel(task.Id)"> <img :src="UnassignIcon" /> </span>
 
@@ -41,7 +43,7 @@
       <span @click="toggleDeductible(task.Id)">
         <img
           :src="ConstructionIcon"
-          :class="task.Deductible ? 'colormepink' : ''"
+          :class="task.Deductible ? 'toggled' : ''"
         />
       </span>
     </div>
