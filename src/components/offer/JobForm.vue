@@ -49,6 +49,7 @@
               labelFull="Beskrivning"
               labelShort="description"
               v-model="task"
+              ref="desc"
               required
             />
 
@@ -105,6 +106,7 @@ export default defineComponent({
       }
       this.task = ''
       this.amount = ''
+      this.$refs.desc.$el.children[1].focus()
     },
     addLocation() {
       store.dispatch({
