@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Drawer from './components/fsuic/Drawer.vue'
+import Drawer from './components/common/Drawer.vue'
 import store from './store'
 
 export default defineComponent({

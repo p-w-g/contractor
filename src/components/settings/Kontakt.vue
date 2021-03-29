@@ -47,7 +47,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import store from '@/store/index'
-import FormInput from '../fsuic/FormInput.vue'
+import FormInput from '../common/FormInput.vue'
 import { repModel } from '@/store/models'
 
 export default defineComponent({
