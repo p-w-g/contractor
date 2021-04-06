@@ -7,73 +7,67 @@
     </template>
 
     <template #content>
-      <header>
-        <form class="fr__form" @submit.prevent="saveDisclaimers">
-          <fieldset>
-            <text-area
-              labelFull="Vilkor om betalning, fakturering, förfallodag"
-              labelShort="fakturering"
-              v-model="fakturering"
-            />
+      <form class="fr__form" @submit.prevent="saveDisclaimers">
+        <fieldset>
+          <text-area
+            labelFull="Vilkor om betalning, fakturering, förfallodag"
+            labelShort="fakturering"
+            v-model="fakturering"
+          />
 
-            <text-area
-              labelFull="Vilkor om giltighetstid"
-              labelShort="giltig"
-              v-model="giltig"
-            />
+          <text-area
+            labelFull="Vilkor om giltighetstid"
+            labelShort="giltig"
+            v-model="giltig"
+          />
 
-            <text-area
-              labelFull="Vilkor om garanti och eventuelt materialkostnader"
-              labelShort="garanti"
-              v-model="garanti"
-            />
+          <text-area
+            labelFull="Vilkor om garanti och eventuelt materialkostnader"
+            labelShort="garanti"
+            v-model="garanti"
+          />
 
-            <text-area
-              labelFull="Vilkor om arbetstid och eventuelt överenskommelse"
-              labelShort="arbetstid"
-              v-model="arbetstid"
-            />
+          <text-area
+            labelFull="Vilkor om arbetstid och eventuelt överenskommelse"
+            labelShort="arbetstid"
+            v-model="arbetstid"
+          />
 
-            <text-area
-              labelFull="Vilkor om företagsförsäkring och skådeförsäkring"
-              labelShort="försäkring"
-              v-model="forsakring"
-            />
+          <text-area
+            labelFull="Vilkor om företagsförsäkring och skådeförsäkring"
+            labelShort="försäkring"
+            v-model="forsakring"
+          />
 
-            <text-area
-              labelFull="Vilkor om eventuelt mindre avvikelse"
-              labelShort="avvikelse"
-              v-model="avvikelse"
-            />
+          <text-area
+            labelFull="Vilkor om eventuelt mindre avvikelse"
+            labelShort="avvikelse"
+            v-model="avvikelse"
+          />
 
-            <text-area
-              labelFull="Vilkor om eventuelt tillägtjänster eller extrauppgifter pga
+          <text-area
+            labelFull="Vilkor om eventuelt tillägtjänster eller extrauppgifter pga
               omständigheter"
-              labelShort="extra"
-              v-model="extra"
-            />
+            labelShort="extra"
+            v-model="extra"
+          />
 
-            <text-area
-              labelFull="Vilkor om ROT / RUT och kräv"
-              labelShort="rot"
-              v-model="rot"
-            />
+          <text-area
+            labelFull="Vilkor om ROT / RUT och kräv"
+            labelShort="rot"
+            v-model="rot"
+          />
 
-            <text-area
-              labelFull="Övrigt"
-              labelShort="ovrigt"
-              v-model="ovrigt"
-            />
-          </fieldset>
-        </form>
-      </header>
+          <text-area labelFull="Övrigt" labelShort="ovrigt" v-model="ovrigt" />
+        </fieldset>
 
-      <button
-        class="fr__button--submit fr__button--funky"
-        @click="saveDisclaimers"
-      >
-        Spåra
-      </button>
+        <button
+          class="fr__button--submit fr__button--funky"
+          @click="saveDisclaimers"
+        >
+          Spåra
+        </button>
+      </form>
     </template>
   </accordion>
 
@@ -82,15 +76,17 @@
       <h3>Förhandsgranskning av Vilkor</h3>
     </template>
     <template #content>
-      <p>fakturering: {{ this.disclaimerData.fakturering }}</p>
-      <p>giltig: {{ this.disclaimerData.giltig }}</p>
-      <p>garanti: {{ this.disclaimerData.garanti }}</p>
-      <p>arbetstid: {{ this.disclaimerData.arbetstid }}</p>
-      <p>försäkring: {{ this.disclaimerData.forsakring }}</p>
-      <p>avvikelse: {{ this.disclaimerData.avvikelse }}</p>
-      <p>extra: {{ this.disclaimerData.extra }}</p>
-      <p>rot: {{ this.disclaimerData.rot }}</p>
-      <p>ovrigt: {{ this.disclaimerData.ovrigt }}</p>
+      <article>
+        <p>fakturering: {{ this.disclaimerData.fakturering }}</p>
+        <p>giltig: {{ this.disclaimerData.giltig }}</p>
+        <p>garanti: {{ this.disclaimerData.garanti }}</p>
+        <p>arbetstid: {{ this.disclaimerData.arbetstid }}</p>
+        <p>försäkring: {{ this.disclaimerData.forsakring }}</p>
+        <p>avvikelse: {{ this.disclaimerData.avvikelse }}</p>
+        <p>extra: {{ this.disclaimerData.extra }}</p>
+        <p>rot: {{ this.disclaimerData.rot }}</p>
+        <p>ovrigt: {{ this.disclaimerData.ovrigt }}</p>
+      </article>
     </template>
   </accordion>
   <button

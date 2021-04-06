@@ -65,17 +65,19 @@
       <h3>Förhandsgranskning av Företagsuppgifter</h3>
     </template>
     <template #content>
-      <img :src="companyData.previewImage" class="uploading-image" />
-      <p>Lead in: {{ this.companyData.leadin }}</p>
-      <p>Organisation nummer: {{ this.companyData.orgnummer }}</p>
-      <p>Hemsida {{ this.companyData.hemsida }}</p>
-      <p>
-        Address:
-        {{
-          `${this.companyData.address?.ett}, ${this.companyData.address?.tva} `
-        }}
-      </p>
-      <p>F-Skatt gödkänd: {{ this.companyData.fskatt ? 'Ja' : 'Nej' }}</p>
+      <article>
+        <img :src="companyData.previewImage" class="uploading-image" />
+        <p>Lead in: {{ this.companyData.leadin }}</p>
+        <p>Organisation nummer: {{ this.companyData.orgnummer }}</p>
+        <p>Hemsida {{ this.companyData.hemsida }}</p>
+        <p>
+          Address:
+          {{
+            `${this.companyData.address?.ett}, ${this.companyData.address?.tva} `
+          }}
+        </p>
+        <p>F-Skatt gödkänd: {{ this.companyData.fskatt ? 'Ja' : 'Nej' }}</p>
+      </article>
     </template>
   </accordion>
   <button class="fr__button--submit fr__button--funky" @click="clearCompany">

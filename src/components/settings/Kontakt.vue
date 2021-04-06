@@ -38,9 +38,11 @@
       <h3>Förhandsgranskning av Kontaktperson uppgifter</h3>
     </template>
     <template #content>
-      <p>Kontaktperson: {{ this.repData.names }}</p>
-      <p>Email: {{ this.repData.mail }}</p>
-      <p>Telefon: {{ this.repData.mobile }}</p>
+      <article>
+        <p>Kontaktperson: {{ this.repData.names }}</p>
+        <p>Email: {{ this.repData.mail }}</p>
+        <p>Telefon: {{ this.repData.mobile }}</p>
+      </article>
     </template>
   </accordion>
   <button class="fr__button--submit fr__button--funky" @click="clearRep">

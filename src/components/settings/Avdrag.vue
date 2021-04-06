@@ -42,6 +42,7 @@
   <button class="fr__button--submit fr__button--funky" @click="clearAvdrag">
     Rensa avdragsuppgifter
   </button>
+  <hr />
 </template>
 
 <script lang="ts">
