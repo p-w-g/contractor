@@ -10,9 +10,9 @@
       :class="isOpen ? 'accordion--open' : 'accordion--close'"
     />
   </div>
-  <transition-group name="fade" appear>
+  <transition name="fade" appear>
     <slot v-if="isOpen" name="content"></slot>
-  </transition-group>
+  </transition>
 </template>
 
 <script lang="ts">
