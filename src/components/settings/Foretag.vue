@@ -1,87 +1,103 @@
 <template>
-  <div class="fr__heading">
-    <h3>Företagsuppgifter</h3>
-  </div>
-  <div>
-    <form class="fr__form" @submit.prevent="saveCompany">
-      <fieldset>
-        <div class="fr__label-wrapper--image">
-          <label for="logo">Logga</label>
-          <br />
-          <input id="logo" type="file" accept="image/*" @change="uploadImage" />
-        </div>
+  <accordion>
+    <template #header>
+      <div class="fr__heading">
+        <h3>Företagsuppgifter</h3>
+      </div>
+    </template>
+    <template #content>
+      <div>
+        <form class="fr__form" @submit.prevent="saveCompany">
+          <fieldset>
+            <div class="fr__label-wrapper--image">
+              <label for="logo">Logga</label>
+              <br />
+              <input
+                id="logo"
+                type="file"
+                accept="image/*"
+                @change="uploadImage"
+              />
+            </div>
 
-        <form-input
-          labelFull="Inleddning text i offert"
-          labelShort="leadin"
-          v-model="leadin"
-        />
+            <form-input
+              labelFull="Inleddning text i offert"
+              labelShort="leadin"
+              v-model="leadin"
+            />
 
-        <form-input
-          labelFull="Hemsida"
-          labelShort="hemsida"
-          v-model="hemsida"
-        />
+            <form-input
+              labelFull="Hemsida"
+              labelShort="hemsida"
+              v-model="hemsida"
+            />
 
-        <form-input
-          labelFull="Organisation eller Personnummer"
-          labelShort="orgnummer"
-          v-model="orgnummer"
-        />
+            <form-input
+              labelFull="Organisation eller Personnummer"
+              labelShort="orgnummer"
+              v-model="orgnummer"
+            />
 
-        <form-input
-          labelFull="Addres: råd 1"
-          labelShort="address1"
-          v-model="address.ett"
-        />
+            <form-input
+              labelFull="Addres: råd 1"
+              labelShort="address1"
+              v-model="address.ett"
+            />
 
-        <form-input
-          labelFull="Addres: råd 2"
-          labelShort="address2"
-          v-model="address.tva"
-        />
+            <form-input
+              labelFull="Addres: råd 2"
+              labelShort="address2"
+              v-model="address.tva"
+            />
 
-        <input type="checkbox" id="fskatt" v-model="fskatt" />
-        <label for="fskatt">Godkänd för F-skatt?</label>
-        <br />
-        <button class="fr__button--submit fr__button--funky">Spåra</button>
-      </fieldset>
-    </form>
-  </div>
-  <hr />
+            <input type="checkbox" id="fskatt" v-model="fskatt" />
+            <label for="fskatt">Godkänd för F-skatt?</label>
+            <br />
+            <button class="fr__button--submit fr__button--funky">Spåra</button>
+          </fieldset>
+        </form>
+      </div></template
+    >
+  </accordion>
 
-  <div>
-    <article>
+  <accordion>
+    <template #header>
       <h3>Förhandsgranskning av Företagsuppgifter</h3>
-      <p>Logga</p>
-      <img :src="companyData.previewImage" class="uploading-image" />
-      <p>Lead in: {{ this.companyData.leadin }}</p>
-      <p>Organisation nummer: {{ this.companyData.orgnummer }}</p>
-      <p>Hemsida {{ this.companyData.hemsida }}</p>
-      <p>
-        Address:
-        {{
-          `${this.companyData.address?.ett}, ${this.companyData.address?.tva} `
-        }}
-      </p>
-      <p>F-Skatt gödkänd: {{ this.companyData.fskatt ? 'Ja' : 'Nej' }}</p>
-    </article>
-  </div>
+    </template>
+    <template #content>
+      <article>
+        <img :src="companyData.previewImage" class="uploading-image" />
+        <p>Lead in: {{ this.companyData.leadin }}</p>
+        <p>Organisation nummer: {{ this.companyData.orgnummer }}</p>
+        <p>Hemsida {{ this.companyData.hemsida }}</p>
+        <p>
+          Address:
+          {{
+            `${this.companyData.address?.ett}, ${this.companyData.address?.tva} `
+          }}
+        </p>
+        <p>F-Skatt gödkänd: {{ this.companyData.fskatt ? 'Ja' : 'Nej' }}</p>
+      </article>
+    </template>
+  </accordion>
   <button class="fr__button--submit fr__button--funky" @click="clearCompany">
     Rensa Företagsuppgifter
   </button>
+  <hr />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import store from '@/store/index'
-import FormInput from '../fsuic/FormInput.vue'
+import FormInput from '../common/FormInput.vue'
+import Accordion from '../common/Accordion.vue'
 import { companyModel } from '@/store/models'
 
 export default defineComponent({
   name: 'Foretag',
   components: {
-    FormInput
+    FormInput,
+    Accordion
   },
   data: () => ({
     previewImage: '',
