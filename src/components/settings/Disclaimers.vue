@@ -1,7 +1,12 @@
 <template>
-  <div class="fr__heading">
-    <h3>Vilkor</h3>
-    <div>
+  <accordion>
+    <template #header>
+      <div class="fr__heading">
+        <h3>Vilkor</h3>
+      </div>
+    </template>
+
+    <template #content>
       <header>
         <form class="fr__form" @submit.prevent="saveDisclaimers">
           <fieldset>
@@ -62,16 +67,21 @@
           </fieldset>
         </form>
       </header>
-    </div>
-  </div>
 
-  <button class="fr__button--submit fr__button--funky" @click="saveDisclaimers">
-    Spåra
-  </button>
-  <hr />
-  <div>
-    <article>
+      <button
+        class="fr__button--submit fr__button--funky"
+        @click="saveDisclaimers"
+      >
+        Spåra
+      </button>
+    </template>
+  </accordion>
+
+  <accordion>
+    <template #header>
       <h3>Förhandsgranskning av Vilkor</h3>
+    </template>
+    <template #content>
       <p>fakturering: {{ this.disclaimerData.fakturering }}</p>
       <p>giltig: {{ this.disclaimerData.giltig }}</p>
       <p>garanti: {{ this.disclaimerData.garanti }}</p>
@@ -81,8 +91,8 @@
       <p>extra: {{ this.disclaimerData.extra }}</p>
       <p>rot: {{ this.disclaimerData.rot }}</p>
       <p>ovrigt: {{ this.disclaimerData.ovrigt }}</p>
-    </article>
-  </div>
+    </template>
+  </accordion>
   <button
     class="fr__button--submit fr__button--funky"
     @click="clearDisclaimers"
@@ -96,11 +106,13 @@ import { defineComponent } from 'vue'
 import store from '@/store/index'
 import TextArea from '../common/TextArea.vue'
 import { disclaimerModel } from '@/store/models'
+import Accordion from '../common/Accordion.vue'
 
 export default defineComponent({
   name: 'Disclaimers',
   components: {
-    TextArea
+    TextArea,
+    Accordion
   },
   computed: {
     disclaimerData(): disclaimerModel {
@@ -132,11 +144,11 @@ export default defineComponent({
         rot: this.rot,
         ovrigt: this.ovrigt
       })
-    }
-  },
+    },
 
-  clearDisclaimers() {
-    store.dispatch('clearDisclaimersAction')
+    clearDisclaimers() {
+      store.dispatch('clearDisclaimersAction')
+    }
   }
 })
 </script>

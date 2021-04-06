@@ -282,6 +282,11 @@ export default createStore({
       context.commit('saveRepJson')
     },
 
+    clearRepAction(context) {
+      context.commit('clearRepDetails')
+      context.commit('saveRepJson')
+    },
+
     saveCompanyAction(context, payload) {
       context.commit('addCompanyDetails', payload)
       context.commit('saveCompanyJson')
