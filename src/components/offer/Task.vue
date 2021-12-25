@@ -22,7 +22,12 @@
 
   <td>
     <select v-model="selected" @change="assignLabel" name="labels">
-      <option v-for="(label, i) in labels" :value="label" :key="i">
+      <option
+        v-for="(label, i) in labels"
+        :value="label"
+        :selected="selected === label"
+        :key="i"
+      >
         {{ label }}
       </option>
     </select>
@@ -51,14 +56,14 @@
 </template>
 
 <script lang="ts">
-import DeleteIcon from '../../assets/delete.svg'
-import EditIcon from '../../assets/edit.svg'
-import UnassignIcon from '../../assets/bookmark_remove.svg'
-import CloneIcon from '../../assets/content_copy.svg'
-import ConstructionIcon from '../../assets/construction.svg'
-import { defineComponent } from 'vue'
-import store from '@/store/index'
-import { avdragModel } from '@/store/models'
+import DeleteIcon from '../../assets/delete.svg';
+import EditIcon from '../../assets/edit.svg';
+import UnassignIcon from '../../assets/bookmark_remove.svg';
+import CloneIcon from '../../assets/content_copy.svg';
+import ConstructionIcon from '../../assets/construction.svg';
+import { defineComponent } from 'vue';
+import store from '@/store/index';
+import { avdragModel } from '@/store/models';
 
 export default defineComponent({
   name: 'Task',
@@ -69,22 +74,22 @@ export default defineComponent({
       EditIcon,
       UnassignIcon,
       CloneIcon,
-      ConstructionIcon
-    }
+      ConstructionIcon,
+    };
   },
   components: {},
   data: () => ({
     isEditable: false,
     selected: '',
     localAmount: Number,
-    localDescription: String
+    localDescription: String,
   }),
   computed: {
     labels(): Array<string> {
-      return store.getters.labels
+      return store.getters.labels;
     },
     avdrag(): avdragModel {
-      return store.getters.avdrag
+      return store.getters.avdrag;
     },
     dynamicAmount(): string {
       let percentage =
@@ -92,74 +97,74 @@ export default defineComponent({
         this.avdrag.percentage === undefined ||
         this.avdrag.percentage === null
           ? 0
-          : Number(this.avdrag.percentage)
+          : Number(this.avdrag.percentage);
 
-      const reducedAmount = (Number(this.task.Amount) * percentage) / 100
+      const reducedAmount = (Number(this.task.Amount) * percentage) / 100;
       return !this.task.Deductible
         ? this.task.Amount
-        : `${this.task.Amount}, varav avdrag: ${reducedAmount}`
-    }
+        : `${this.task.Amount}, varav avdrag: ${reducedAmount}`;
+    },
   },
   props: {
-    task: Object
+    task: Object,
   },
   methods: {
     assignLabel() {
       store.dispatch({
         type: 'assignLabelAction',
         label: this.selected,
-        id: this.task?.Id
-      })
-      this.selected = ''
+        id: this.task?.Id,
+      });
+      this.selected = '';
     },
 
     deleteTask(id: number) {
       store.dispatch({
         type: 'deleteTaskAction',
-        id: id
-      })
+        id: id,
+      });
     },
 
     unassignLabel(id: number) {
       store.dispatch({
         type: 'unassignLabelAction',
-        id: id
-      })
+        id: id,
+      });
     },
 
     cloneTask(id: number) {
       store.dispatch({
         type: 'cloneTaskAction',
-        id: id
-      })
+        id: id,
+      });
     },
 
     toggleEditing(id: number) {
       if (this.isEditable) {
-        const description = this.localDescription
-        const amount = this.localAmount
+        const description = this.localDescription;
+        const amount = this.localAmount;
         store.dispatch({
           type: 'updateTaskAction',
           id: id,
           desc: description,
-          amount: amount
-        })
-        this.isEditable = false
+          amount: amount,
+        });
+        this.isEditable = false;
 
-        return
+        return;
       }
       if (!this.isEditable) {
-        this.localAmount = this.task?.Amount
-        this.localDescription = this.task?.Description
-        this.isEditable = true
+        this.localAmount = this.task?.Amount;
+        this.localDescription = this.task?.Description;
+        this.isEditable = true;
 
-        return
+        return;
       }
     },
 
     toggleDeductible(id: number) {
-      store.dispatch('toggleDeductibleAction', id)
-    }
-  }
-})
+      store.dispatch('toggleDeductibleAction', id);
+    },
+  },
+});
 </script>
