@@ -64,10 +64,12 @@ td {
 th {
   padding: 0 3px;
 }
+
 .toggled {
   background: variables.$electric-orange;
   border-radius: 4px;
 }
+
 .drawer {
   position: fixed;
   top: 0;
@@ -75,9 +77,9 @@ th {
   transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
   border-bottom-right-radius: 5px;
   background: radial-gradient(variables.$prime__bg 0%, variables.$alt__bg 75%);
+
   &--open {
     transform: translateX(147px) rotate(180deg);
-
     background: variables.$prime__bg;
   }
 }
@@ -86,6 +88,7 @@ th {
   color: variables.$prime__text;
   text-decoration: none;
 }
+
 .nav {
   padding: 18px;
   position: fixed;
@@ -96,6 +99,7 @@ th {
   border-bottom-right-radius: 5px;
 
   list-style: none;
+
   a {
     color: variables.$prime__text;
     text-decoration: none;
@@ -228,8 +232,13 @@ th {
     }
   }
 }
+
 .banner-logo {
   font-family: 'Rebrushed', sans-serif;
   font-size: 5.2rem;
   color: variables.$prime__text;
+
+  + article {
+    user-select: none;
+  }
 }
